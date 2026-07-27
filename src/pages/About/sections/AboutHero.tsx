@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import tomate from "/src/assets/images/tomate.jpg"
 import { Leaf, Shield, Users } from "lucide-react";
 
 export default function AboutHero() {
@@ -47,7 +48,7 @@ export default function AboutHero() {
           >
             <div className="aspect-square rounded-3xl overflow-hidden shadow-xl border border-rekany-cream">
               <img
-                src="/src/assets/images/tomate.jpg"
+                src={tomate}
                 alt="REKANY AGRI"
                 className="w-full h-full object-cover"
               />

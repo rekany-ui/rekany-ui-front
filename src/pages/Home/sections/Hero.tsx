@@ -3,6 +3,7 @@ import { Search, Star, Globe, ArrowRight} from "lucide-react";
 import { Link } from "react-router-dom";
 
 import bg from "@/assets/images/test2.jpg";
+import legume from "@/assets/images/legume.jpg";
 import Button from "../../../components/ui/Button";
 import Counter from "../../../components/ui/Counter";
 
@@ -133,7 +134,7 @@ export default function Hero() {
             >
               <div className="bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 p-6 hover:border-rekany-light/30 transition-all duration-500 hover:shadow-2xl hover:shadow-rekany-light/10">
                 <img
-                  src="/src/assets/images/legume.jpg"
+                  src={legume}
                   className="h-72 w-full rounded-2xl object-cover"
                   alt="Produits bio de Madagascar"
                 />
