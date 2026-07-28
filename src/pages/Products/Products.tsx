@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -12,11 +12,40 @@ import {
   Truck,
 } from "lucide-react";
 
-import { CATEGORIES, formatPrice, products, type Product } from "@/data/products";
+import { formatPrice, type Product } from "@/data/products";
 import salade2 from "@/assets/images/salade2.jpg";
 
-const origins = Array.from(new Set<string>(products.map((p: Product) => p.origin))).sort();
-const certifications = Array.from(new Set<string>(products.map((p: Product) => p.certification))).sort();
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
+type ApiProduct = {
+  id: number | string;
+  nom: string;
+  categorie: string;
+  prix: number | string;
+  unite: string;
+  certification: string;
+  origine: string;
+  disponible: boolean | number;
+  image_url: string | null;
+  description: string;
+};
+
+type ProductsResponse = {
+  data: ApiProduct[];
+};
+
+const toProduct = (product: ApiProduct): Product => ({
+  id: String(product.id),
+  name: product.nom,
+  category: product.categorie,
+  price: Number(product.prix),
+  unit: product.unite,
+  certification: product.certification,
+  origin: product.origine,
+  available: Boolean(product.disponible),
+  image: product.image_url || salade2,
+  description: product.description,
+});
 
 const highlights = [
   { icon: Leaf, title: "100% Biologique", text: "Cultures sans intrant chimique" },
@@ -80,12 +109,62 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 }
 
 export default function ProductsPage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("Toutes");
   const [origin, setOrigin] = useState("Toutes");
   const [certification, setCertification] = useState("Toutes");
   const [maxPrice, setMaxPrice] = useState(50000);
   const [onlyAvailable, setOnlyAvailable] = useState(false);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadProducts() {
+      try {
+        setIsLoading(true);
+        setLoadError(null);
+
+        const response = await fetch(`${API_URL}/api/produit`, {
+          headers: { Accept: "application/json" },
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error("Impossible de charger les produits.");
+        }
+
+        const result: ProductsResponse = await response.json();
+        const loadedProducts = result.data.map(toProduct);
+        setProducts(loadedProducts);
+        setMaxPrice(Math.max(50000, ...loadedProducts.map((product) => product.price)));
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setLoadError("Les produits ne peuvent pas être chargés pour le moment.");
+      } finally {
+        if (!controller.signal.aborted) setIsLoading(false);
+      }
+    }
+
+    void loadProducts();
+    return () => controller.abort();
+  }, []);
+
+  const categories = useMemo(
+    () => Array.from(new Set(products.map((p) => p.category))).sort(),
+    [products],
+  );
+  const origins = useMemo(
+    () => Array.from(new Set(products.map((p) => p.origin))).sort(),
+    [products],
+  );
+  const certifications = useMemo(
+    () => Array.from(new Set(products.map((p) => p.certification))).sort(),
+    [products],
+  );
+  const priceRangeMax = Math.max(50000, ...products.map((product) => product.price));
 
   const filtered = useMemo<Product[]>(
     () =>
@@ -202,7 +281,7 @@ export default function ProductsPage() {
 
           {/* Category pills */}
           <div className="mt-8 flex flex-wrap gap-2">
-            {["Toutes", ...CATEGORIES].map((c) => (
+            {["Toutes", ...categories].map((c) => (
               <button
                 key={c}
                 type="button"
@@ -264,7 +343,7 @@ export default function ProductsPage() {
                   id="price"
                   type="range"
                   min={10000}
-                  max={50000}
+                  max={priceRangeMax}
                   step={1000}
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(Number(e.target.value))}
@@ -294,7 +373,19 @@ export default function ProductsPage() {
             </AnimatePresence>
           </motion.div>
 
-          {filtered.length === 0 ? (
+          {isLoading ? (
+            <div className="mt-12 rounded-2xl border border-dashed border-rekany-cream p-12 text-center text-sm text-rekany-gray/70">
+              Chargement des produits...
+            </div>
+          ) : null}
+
+          {loadError ? (
+            <div className="mt-12 rounded-2xl border border-dashed border-rekany-cream p-12 text-center text-sm text-rekany-gray/70">
+              {loadError}
+            </div>
+          ) : null}
+
+          {!isLoading && !loadError && filtered.length === 0 ? (
             <div className="mt-12 rounded-2xl border border-dashed border-rekany-cream p-12 text-center text-sm text-rekany-gray/70">
               Aucun produit ne correspond à vos filtres.
             </div>
