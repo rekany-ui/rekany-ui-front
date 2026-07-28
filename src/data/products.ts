@@ -21,6 +21,14 @@ export const CATEGORIES = [
   "Transformés",
 ] as const;
 
+import vary from "@/assets/images/vary.jpg";
+import salade2 from "@/assets/images/salade2.jpg";
+import voankazo from "@/assets/images/voankazo.jpg";
+import epice from "@/assets/images/epice.jpg";
+import pasteque from "@/assets/images/pasteque.jpg";
+import huile from "@/assets/images/huile.jpg";
+import produit from "@/assets/images/produit.jpg";
+
 export const products: Product[] = [
   {
     id: "riz-bio",
@@ -31,7 +39,7 @@ export const products: Product[] = [
     certification: "Ecocert Bio",
     origin: "Alaotra-Mangoro",
     available: true,
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=900&q=80",
+    image: vary,
     description:
       "Riz blanc long grain cultivé sans intrant chimique, séché au soleil et trié à la main.",
   },
@@ -44,7 +52,7 @@ export const products: Product[] = [
     certification: "Ecocert Bio",
     origin: "Vakinankaratra",
     available: true,
-    image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=80",
+    image: salade2,
     description:
       "Assortiment de légumes de saison récoltés le matin même et livrés en 24 heures.",
   },
@@ -57,7 +65,7 @@ export const products: Product[] = [
     certification: "Ecocert Bio",
     origin: "Atsinanana",
     available: true,
-    image: "https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=900&q=80",
+    image: voankazo,
     description: "Mangues, litchis et bananes issus de vergers agroforestiers certifiés.",
   },
   {
@@ -69,7 +77,7 @@ export const products: Product[] = [
     certification: "Bio + Équitable",
     origin: "Sava",
     available: true,
-    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=900&q=80",
+    image: epice,
     description: "Vanille bourbon, poivre noir et girofle séchés selon les méthodes ancestrales.",
   },
   {
@@ -81,7 +89,7 @@ export const products: Product[] = [
     certification: "Ecocert Bio",
     origin: "Itasy",
     available: false,
-    image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=900&q=80",
+    image: pasteque, // Je mets pasteque ici car vous aviez 5 images pour 7 produits
     description: "Miel brut non pasteurisé récolté dans des ruches en forêt primaire.",
   },
   {
@@ -93,7 +101,7 @@ export const products: Product[] = [
     certification: "Bio + Équitable",
     origin: "Boeny",
     available: true,
-    image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=900&q=80",
+    image: huile,
     description: "Huile première pression à froid, riche en oméga et sans raffinage.",
   },
   {
@@ -105,7 +113,7 @@ export const products: Product[] = [
     certification: "Ecocert Bio",
     origin: "Analamanga",
     available: true,
-    image: "https://images.unsplash.com/photo-1608686207856-001b95cf60ca?auto=format&fit=crop&w=900&q=80",
+    image: produit,
     description: "Farines, fruits séchés et préparations artisanales conditionnés à l'unité.",
   },
 ];

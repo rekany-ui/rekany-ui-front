@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import { Search, Star, Globe, ArrowRight} from "lucide-react";
+import { Search, Star, Globe, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import bg from "@/assets/images/test2.jpg";
-import legume from "@/assets/images/legume.jpg";
 import Button from "../../../components/ui/Button";
 import Counter from "../../../components/ui/Counter";
 
@@ -16,14 +15,14 @@ const stats = [
 export default function Hero() {
   return (
     <section
-  className="relative overflow-hidden bg-cover bg-center min-h-screen flex items-center pt-20"
-  style={{
-    backgroundImage: `url(${bg})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-  }}
->
+      className="relative overflow-hidden bg-cover bg-center min-h-screen flex items-center pt-20"
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       {/* Overlay avec dégradé flou en bas */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/50 to-black/70" />
 
@@ -77,9 +76,12 @@ export default function Hero() {
                 transition={{ duration: 1, delay: 0.4 }}
                 className="flex flex-wrap items-center gap-4"
               >
-                <Button variant="primary" icon>
-                  Découvrir nos produits
-                </Button>
+
+                <Link to="/produits">
+                  <Button variant="primary" icon>
+                    Découvrir nos produits
+                  </Button>
+                </Link>
 
                 <Link to="/contact">
                   <Button variant="secondary">
@@ -134,7 +136,7 @@ export default function Hero() {
             >
               <div className="bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 p-6 hover:border-rekany-light/30 transition-all duration-500 hover:shadow-2xl hover:shadow-rekany-light/10">
                 <img
-                  src={legume}
+                  src="/src/assets/images/legume.jpg"
                   className="h-72 w-full rounded-2xl object-cover"
                   alt="Produits bio de Madagascar"
                 />
@@ -165,10 +167,13 @@ export default function Hero() {
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-white/10">
-                  <button className="w-full py-3 text-sm font-semibold text-rekany-light border border-rekany-light/30 rounded-xl hover:bg-rekany-light/10 transition-all duration-300 flex items-center justify-center gap-2 group">
+                  <Link
+                    to="/a-propos"
+                    className="w-full py-3 text-sm font-semibold text-rekany-light border border-rekany-light/30 rounded-xl hover:bg-rekany-light/10 transition-all duration-300 flex items-center justify-center gap-2 group"
+                  >
                     En savoir plus
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </motion.div>

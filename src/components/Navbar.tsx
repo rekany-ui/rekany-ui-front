@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Leaf, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import iconImage from "../assets/images/icon.jpeg";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -37,8 +38,12 @@ export default function Navbar() {
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rekany-dark to-rekany-light flex items-center justify-center">
-                <Leaf className="w-5 h-5 text-white" />
+              <div className="w-15 h-15 rounded-full bg-gradient-to-br from-rekany-dark to-rekany-light flex items-center justify-center overflow-hidden">
+                <img
+                  src={iconImage}
+                  alt="Rekany Agri"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="font-poppins font-bold text-xl text-rekany-dark tracking-tight">
                 REKANY AGRI

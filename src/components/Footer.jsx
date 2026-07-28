@@ -1,6 +1,10 @@
 import { Leaf } from "lucide-react";
 import { FiFacebook, FiInstagram, FiLinkedin, FiTwitter } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import avemaLogo from "../assets/images/AVEMA.png";
+import fedemLogo from "../assets/images/fedem.jpeg";
+import connectLogo from "../assets/images/connect.jpeg";
+import exportLogo from "../assets/images/export.jpeg";
 
 export default function Footer() {
   return (
@@ -10,8 +14,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                <Leaf className="w-5 h-5 text-rekany-light" />
+              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
+                <img
+                  src={avemaLogo}
+                  alt="Rekany Agri"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="font-poppins font-bold text-xl">REKANY AGRI</span>
             </div>
@@ -139,6 +147,43 @@ export default function Footer() {
                 S'inscrire
               </button>
             </form>
+          </div>
+        </div>
+
+        {/* Section Partenaires */}
+        <div className="border-t border-white/10 pt-8 mb-8">
+          <h4 className="font-poppins font-semibold text-lg text-center mb-6">
+            Nos Partenaires
+          </h4>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+            <div className="w-full max-w-[150px] h-[80px] flex items-center justify-center">
+              <img
+                src={avemaLogo}
+                alt="AVEMA"
+                className="max-w-full max-h-full object-contain rounded-lg"
+              />
+            </div>
+            <div className="w-full max-w-[150px] h-[80px] flex items-center justify-center">
+              <img
+                src={fedemLogo}
+                alt="FEDEM"
+                className="max-w-full max-h-full object-contain rounded-lg"
+              />
+            </div>
+            <div className="w-full max-w-[150px] h-[80px] flex items-center justify-center">
+              <img
+                src={connectLogo}
+                alt="Connect"
+                className="max-w-full max-h-full object-contain rounded-lg"
+              />
+            </div>
+            <div className="w-full max-w-[150px] h-[80px] flex items-center justify-center">
+              <img
+                src={exportLogo}
+                alt="Export"
+                className="max-w-full max-h-full object-contain rounded-lg"
+              />
+            </div>
           </div>
         </div>
 
