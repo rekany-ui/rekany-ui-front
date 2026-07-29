@@ -1,8 +1,3 @@
-// src/data/products.ts
-
-import type { Product } from "@/types/product";
-
-// Importer les images
 import vary from "@/assets/images/vary.jpg";
 import salade2 from "@/assets/images/salade2.jpg";
 import voankazo from "@/assets/images/voankazo.jpg";
@@ -10,6 +5,19 @@ import epice from "@/assets/images/epice.jpg";
 import pasteque from "@/assets/images/pasteque.jpg";
 import huile from "@/assets/images/huile.jpg";
 import produit from "@/assets/images/produit.jpg";
+
+export type Product = {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  unit: string;
+  certification: string;
+  origin: string;
+  available: boolean;
+  image: string;
+  description: string;
+};
 
 export const CATEGORIES = [
   "Céréales",
@@ -21,7 +29,9 @@ export const CATEGORIES = [
   "Transformés",
 ] as const;
 
-export const mockProducts: Product[] = [
+
+
+export const products: Product[] = [
   {
     id: "riz-bio",
     name: "Riz Bio d'Alaotra",
@@ -109,4 +119,4 @@ export const mockProducts: Product[] = [
 ];
 
 export const formatPrice = (value: number) =>
-  new Intl.NumberFormat("fr-MG", { maximumFractionDigits: 0 }).format(value) + " Ar";
+    new Intl.NumberFormat("fr-MG", { maximumFractionDigits: 0 }).format(value) + " Ar";
