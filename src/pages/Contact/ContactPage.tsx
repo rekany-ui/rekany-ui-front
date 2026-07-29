@@ -98,7 +98,6 @@ export default function ContactPage() {
     setError(null);
 
     try {
-      // Validation des données
       if (!formData.name.trim()) {
         throw new Error("Veuillez entrer votre nom");
       }
@@ -109,7 +108,6 @@ export default function ContactPage() {
         throw new Error("Votre message doit faire au moins 10 caractères");
       }
 
-      // Préparer les données
       const sujetLabel = subjects.find(s => s.id === selectedSubject)?.label || "Autre";
 
       const data = {
@@ -123,13 +121,11 @@ export default function ContactPage() {
 
       console.log('📤 Envoi au backend Laravel:', data);
 
-      // Utiliser le provider
       const result = await contactProvider.create(data);
 
       console.log('✅ Message envoyé avec succès:', result);
       setSent(true);
 
-      // Réinitialiser le formulaire
       setFormData({
         name: "",
         email: "",
@@ -139,7 +135,6 @@ export default function ContactPage() {
       });
       setSelectedSubject("particulier");
 
-      // Cacher le message de succès après 5 secondes
       setTimeout(() => {
         setSent(false);
       }, 5000);
@@ -155,7 +150,6 @@ export default function ContactPage() {
 
   return (
     <div className="relative min-h-screen pt-20 pb-16 bg-rekany-beige/40 text-rekany-gray">
-      {/* Ambient background blur circles */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-rekany-dark/10 blur-3xl" />
         <div className="absolute top-1/3 -right-32 h-[420px] w-[420px] rounded-full bg-rekany-light/20 blur-3xl" />
@@ -208,10 +202,8 @@ export default function ContactPage() {
         </motion.div>
       </section>
 
-      {/* Main Grid: Contact Cards & Form */}
       <section className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12 pb-16">
         <div className="grid gap-8 lg:grid-cols-12">
-          {/* Left Column: Contact Methods & Hours/Socials */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             <div className="grid gap-4 sm:grid-cols-2">
               {contactMethods.map((m, i) => {
@@ -246,7 +238,6 @@ export default function ContactPage() {
               })}
             </div>
 
-            {/* Hours & Social Links */}
             <motion.div
               initial={reduce ? undefined : "hidden"}
               whileInView={reduce ? undefined : "show"}
@@ -301,7 +292,6 @@ export default function ContactPage() {
             </motion.div>
           </div>
 
-          {/* Right Column: Contact Form */}
           <motion.div
             initial={reduce ? undefined : { opacity: 0, y: 30 }}
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -364,7 +354,6 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  {/* Interactive Subject Chips */}
                   <div>
                     <label className="mb-2.5 block text-sm font-semibold text-rekany-dark">
                       Sujet de votre demande <span className="text-rekany-marang">*</span>

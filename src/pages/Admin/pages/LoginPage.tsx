@@ -1,5 +1,7 @@
+// admin/pages/LoginPage.tsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hook/useAuth';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -8,8 +10,8 @@ const LoginPage = () => {
     remember: false,
   });
 
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login, isLoggingIn, loginError } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -19,15 +21,18 @@ const LoginPage = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
 
-    // Simulate API call and redirect to backoffice
-    setTimeout(() => {
-      console.log('Login data:', formData);
+    try {
+      await login({
+        email: formData.email,
+        password: formData.password,
+      });
       navigate('/admin/backoffice');
-    }, 500);
+    } catch (error) {
+      console.error('Erreur de connexion:', error);
+    }
   };
 
   return (
@@ -67,6 +72,12 @@ const LoginPage = () => {
           {/* Form */}
           <div className="p-8">
             <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">Connexion</h2>
+
+            {loginError && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
+                {(loginError as any)?.response?.data?.message || 'Erreur lors de la connexion'}
+              </div>
+            )}
 
             <form className="space-y-5" onSubmit={handleSubmit}>
               {/* Email */}
@@ -160,10 +171,10 @@ const LoginPage = () => {
               {/* Submit */}
               <button
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoggingIn}
                 className="w-full py-3.5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-lg shadow-green-500/30 hover:shadow-green-500/40 transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
               >
-                {isLoading ? (
+                {isLoggingIn ? (
                   <span className="flex items-center justify-center gap-2">
                     <svg
                       className="animate-spin h-5 w-5 text-white"
@@ -191,6 +202,14 @@ const LoginPage = () => {
                   'Se connecter'
                 )}
               </button>
+
+              {/* Lien vers l'inscription */}
+              <p className="text-center text-sm text-gray-600">
+                Pas encore de compte ?{' '}
+                <Link to="/admin/register" className="text-green-600 hover:text-green-700 font-medium transition-colors">
+                  Créer un compte
+                </Link>
+              </p>
             </form>
           </div>
         </div>

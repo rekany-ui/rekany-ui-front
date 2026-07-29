@@ -34,7 +34,6 @@ const categories: Category[] = [
   },
 ];
 
-// Diaporama des images
 const slideshowImages = [
   { src: fruits, label: "🍎 Fruits Bio de Madagascar" },
   { src: legumes, label: "🥬 Légumes Bio & Frais" },

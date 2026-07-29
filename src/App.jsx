@@ -4,8 +4,10 @@ import { Routes, Route } from "react-router-dom";
 import { queryClient } from "./config/queryClient";
 import Layout from "./components/Layout";
 import NotFound404 from "./components/NotFound404";
-import LoginPage from "./pages/Admin/LoginPage";
-import AdminPage from "./pages/Admin/AdminPage";
+import LoginPage from "./pages/Admin/pages/LoginPage";
+import AdminPage from "./pages/Admin/pages/AdminPage";
+import RegisterPage from "./pages/Admin/pages/RegisterPage";
+
 
 const HomePage = lazy(() => import("./pages/Home/Home"));
 const ContactPage = lazy(() => import("./pages/Contact/ContactPage"));
@@ -28,6 +30,7 @@ export default function App() {
           </Route>
 
           <Route path="/admin" element={<LoginPage />} />
+          <Route path="/admin/register" element={<RegisterPage />} />
           <Route path="/admin/backoffice" element={<AdminPage />} />
 
           <Route path="*" element={<NotFound404 />} />

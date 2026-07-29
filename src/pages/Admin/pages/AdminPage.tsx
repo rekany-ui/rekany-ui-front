@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
-import { AdminLayout } from './components/layout/AdminLayout';
-import { DashboardPage } from './pages/DashboardPage';
-import { ContactsPage } from './pages/ContactsPage';
-import { ProductsPage } from './pages/ProductsPage';
-import type { Section, ToastType } from './types';
+import { AdminLayout } from '../components/layout/AdminLayout';
+import { DashboardPage } from './DashboardPage';
+import { ContactsPage } from './ContactsPage';
+import { ProductsPage } from './ProductsPage';
+import type { Section, ToastType } from '../types';
 
 export default function AdminPage() {
   const [currentSection, setCurrentSection] = useState<Section>('dashboard');

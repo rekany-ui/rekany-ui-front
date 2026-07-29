@@ -37,7 +37,7 @@ export default function Button({
         <button
             type={type}
             disabled={disabled}
-            title={title} // ✅ AJOUTER CELLE-CI
+            title={title}
             className={`${base} ${styles[variant]} ${className}`}
             {...props}
         >

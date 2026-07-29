@@ -1,5 +1,7 @@
 import type { Section } from '@/types';
 import { FaChartPie, FaAddressBook, FaBoxOpen, FaSignOutAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hook/useAuth';
 
 interface SidebarProps {
   currentSection: Section;
@@ -9,11 +11,34 @@ interface SidebarProps {
 }
 
 export function Sidebar({ currentSection, onSectionChange, isOpen, onClose }: SidebarProps) {
+  const { user, logout, isLoggingOut } = useAuth();
+  const navigate = useNavigate();
+
   const navItems = [
     { id: 'dashboard' as Section, label: 'Tableau de bord', icon: FaChartPie },
     { id: 'contacts' as Section, label: 'Contacts', icon: FaAddressBook },
     { id: 'produits' as Section, label: 'Produits', icon: FaBoxOpen },
   ];
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/admin'); // Redirige vers la page de connexion
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion:', error);
+    }
+  };
+
+  // Récupérer les initiales du nom
+  const getInitials = (name: string) => {
+    if (!name) return 'U';
+    return name
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
 
   return (
     <aside
@@ -55,18 +80,47 @@ export function Sidebar({ currentSection, onSectionChange, isOpen, onClose }: Si
       <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100/80 bg-white/60 backdrop-blur-sm">
         <div className="flex items-center gap-3 rounded-xl bg-rekany-beige/50 px-3 py-2.5">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-rekany-dark to-rekany-light text-xs font-bold text-white shadow-sm">
-            A
+            {getInitials(user?.name || 'Administrateur')}
           </div>
-          <div className="min-w-0">
-            <p className="truncate text-sm font-medium text-gray-900">Administrateur</p>
-            <p className="truncate text-xs text-rekany-gray/40">admin@rekany.mg</p>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-medium text-gray-900">
+              {user?.name || 'Administrateur'}
+            </p>
+            <p className="truncate text-xs text-rekany-gray/40">
+              {user?.email || 'admin@rekany.mg'}
+            </p>
           </div>
           <button
             type="button"
-            onClick={() => console.log('Déconnexion')}
-            className="text-rekany-gray/40 transition-colors hover:text-red-500"
+            onClick={handleLogout}
+            disabled={isLoggingOut}
+            className="text-rekany-gray/40 transition-colors hover:text-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            title="Se déconnecter"
           >
-            <FaSignOutAlt />
+            {isLoggingOut ? (
+              <svg
+                className="animate-spin h-4 w-4 text-red-500"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+            ) : (
+              <FaSignOutAlt />
+            )}
           </button>
         </div>
       </div>
