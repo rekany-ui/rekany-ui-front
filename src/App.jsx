@@ -5,6 +5,7 @@ import HomePage from "./pages/Home/Home";
 import ContactPage from "./pages/Contact/ContactPage";
 import ProductsPage from "./pages/Products/Products";
 import AboutPage from "./pages/About/AboutPage";
+import LoginPage from "./pages/Admin/LoginPage";
 import AdminPage from "./pages/Admin/AdminPage";
 
 export default function App() {
@@ -17,7 +18,8 @@ export default function App() {
         <Route path="/produits" element={<ProductsPage />} />
       </Route>
 
-      <Route path="/admin" element={<AdminPage />} />
+      <Route path="/admin" element={<LoginPage />} />
+      <Route path="/admin/backoffice" element={<AdminPage />} />
       <Route path="*" element={<NotFound404 />} />
     </Routes>
   );
