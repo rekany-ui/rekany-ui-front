@@ -29,7 +29,7 @@ import pasteque from "@/assets/images/pasteque.jpg";
 import huile from "@/assets/images/huile.jpg";
 import produit from "@/assets/images/produit.jpg";
 
-export const products: Product[] = [
+export const mockProducts: Product[] = [
   {
     id: "riz-bio",
     name: "Riz Bio d'Alaotra",
