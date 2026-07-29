@@ -1,9 +1,9 @@
 // src/providers/productProvider.ts
 
 import { getAxios } from "@/config/axios";
-import { mockProducts } from "@/data/products";
 import type { Product, CreateProduct, UpdateProduct } from "@/types/product";
 import { toProduct, toApiProduct } from "@/types/product";
+import { mockProducts } from "@/data/products";
 
 // Mettre à false quand le backend est prêt
 const USE_MOCK = true;
@@ -24,9 +24,9 @@ export const productProvider = {
     }
   },
 
-  async findOne(id: number | string): Promise<Product> {
+  async findOne(id: string): Promise<Product> {
     if (USE_MOCK) {
-      const product = mockProducts.find((p) => p.id === String(id));
+      const product = mockProducts.find((p) => p.id === id);
       if (!product) throw new Error(`Produit ${id} non trouvé`);
       return product;
     }
@@ -36,7 +36,7 @@ export const productProvider = {
       return toProduct(data.data);
     } catch (error) {
       console.warn(`⚠️ Erreur backend pour l'ID ${id}, utilisation des données mock`);
-      const product = mockProducts.find((p) => p.id === String(id));
+      const product = mockProducts.find((p) => p.id === id);
       if (!product) throw new Error(`Produit ${id} non trouvé`);
       return product;
     }
@@ -68,9 +68,9 @@ export const productProvider = {
     }
   },
 
-  async update(id: number, data: UpdateProduct): Promise<Product> {
+  async update(id: string, data: UpdateProduct): Promise<Product> {
     if (USE_MOCK) {
-      const index = mockProducts.findIndex((p) => p.id === String(id));
+      const index = mockProducts.findIndex((p) => p.id === id);
       if (index === -1) throw new Error(`Produit ${id} non trouvé`);
       const updated = { ...mockProducts[index], ...data };
       mockProducts[index] = updated;
@@ -84,7 +84,7 @@ export const productProvider = {
       return toProduct(result.data);
     } catch (error) {
       console.warn(`⚠️ Erreur backend pour l'update ID ${id}, utilisation des données mock`);
-      const index = mockProducts.findIndex((p) => p.id === String(id));
+      const index = mockProducts.findIndex((p) => p.id === id);
       if (index === -1) throw new Error(`Produit ${id} non trouvé`);
       const updated = { ...mockProducts[index], ...data };
       mockProducts[index] = updated;
@@ -92,9 +92,9 @@ export const productProvider = {
     }
   },
 
-  async delete(id: number): Promise<void> {
+  async delete(id: string): Promise<void> {
     if (USE_MOCK) {
-      const index = mockProducts.findIndex((p) => p.id === String(id));
+      const index = mockProducts.findIndex((p) => p.id === id);
       if (index !== -1) {
         mockProducts.splice(index, 1);
         console.log(`📦 Mock: Produit ${id} supprimé`);
@@ -106,7 +106,7 @@ export const productProvider = {
       await getAxios().delete(`/api/produit/${id}`);
     } catch (error) {
       console.warn(`⚠️ Erreur backend pour la suppression ID ${id}, suppression en mode mock`);
-      const index = mockProducts.findIndex((p) => p.id === String(id));
+      const index = mockProducts.findIndex((p) => p.id === id);
       if (index !== -1) {
         mockProducts.splice(index, 1);
       }

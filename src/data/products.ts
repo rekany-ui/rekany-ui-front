@@ -1,15 +1,15 @@
-export type Product = {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  unit: string;
-  certification: string;
-  origin: string;
-  available: boolean;
-  image: string;
-  description: string;
-};
+// src/data/products.ts
+
+import type { Product } from "@/types/product";
+
+// Importer les images
+import vary from "@/assets/images/vary.jpg";
+import salade2 from "@/assets/images/salade2.jpg";
+import voankazo from "@/assets/images/voankazo.jpg";
+import epice from "@/assets/images/epice.jpg";
+import pasteque from "@/assets/images/pasteque.jpg";
+import huile from "@/assets/images/huile.jpg";
+import produit from "@/assets/images/produit.jpg";
 
 export const CATEGORIES = [
   "Céréales",
@@ -20,14 +20,6 @@ export const CATEGORIES = [
   "Huiles",
   "Transformés",
 ] as const;
-
-import vary from "@/assets/images/vary.jpg";
-import salade2 from "@/assets/images/salade2.jpg";
-import voankazo from "@/assets/images/voankazo.jpg";
-import epice from "@/assets/images/epice.jpg";
-import pasteque from "@/assets/images/pasteque.jpg";
-import huile from "@/assets/images/huile.jpg";
-import produit from "@/assets/images/produit.jpg";
 
 export const mockProducts: Product[] = [
   {
@@ -40,8 +32,7 @@ export const mockProducts: Product[] = [
     origin: "Alaotra-Mangoro",
     available: true,
     image: vary,
-    description:
-      "Riz blanc long grain cultivé sans intrant chimique, séché au soleil et trié à la main.",
+    description: "Riz blanc long grain cultivé sans intrant chimique, séché au soleil et trié à la main.",
   },
   {
     id: "legumes-bio",
@@ -53,8 +44,7 @@ export const mockProducts: Product[] = [
     origin: "Vakinankaratra",
     available: true,
     image: salade2,
-    description:
-      "Assortiment de légumes de saison récoltés le matin même et livrés en 24 heures.",
+    description: "Assortiment de légumes de saison récoltés le matin même et livrés en 24 heures.",
   },
   {
     id: "fruits-bio",
@@ -89,7 +79,7 @@ export const mockProducts: Product[] = [
     certification: "Ecocert Bio",
     origin: "Itasy",
     available: false,
-    image: pasteque, // Je mets pasteque ici car vous aviez 5 images pour 7 produits
+    image: pasteque,
     description: "Miel brut non pasteurisé récolté dans des ruches en forêt primaire.",
   },
   {

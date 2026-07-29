@@ -1,4 +1,4 @@
-// types/product.ts
+// src/types/product.ts
 
 // ===== TYPES PRINCIPAUX =====
 
