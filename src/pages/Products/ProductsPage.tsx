@@ -1,10 +1,10 @@
-import { productProvider } from "@/provider/serviceProvider";
 import type { Product } from "@/types/product";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import HeroProduct from "./sections/HeroProduct";
 import Highlights from "./sections/Highlights";
 import Catalogue from "./sections/Catalogue";
+import { productProvider } from "@/provider/productProvider";
 
 export default function ProductsPage() {
   const [query, setQuery] = useState("");
