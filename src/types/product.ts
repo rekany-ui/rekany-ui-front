@@ -13,6 +13,7 @@ export interface Product {
   available: boolean;
   image: string;
   description: string;
+  created_at?: string;
 }
 
 export interface CreateProduct {

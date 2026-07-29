@@ -10,6 +10,8 @@ interface ButtonProps {
     type?: "button" | "submit" | "reset";
     onClick?: () => void;
     disabled?: boolean;
+    className?: string;
+    title?: string;
 }
 
 export default function Button({
@@ -18,6 +20,8 @@ export default function Button({
     icon = false,
     type = "button",
     disabled = false,
+    className = "",
+    title = "",
     ...props
 }: ButtonProps) {
     const base =
@@ -33,7 +37,8 @@ export default function Button({
         <button
             type={type}
             disabled={disabled}
-            className={`${base} ${styles[variant]}`}
+            title={title} // ✅ AJOUTER CELLE-CI
+            className={`${base} ${styles[variant]} ${className}`}
             {...props}
         >
             {children}
