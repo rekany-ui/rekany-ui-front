@@ -47,15 +47,15 @@ export interface ContactsResponse {
 
 // ===== UTILITAIRES =====
 
-export const toContact = (data: any): Contact => ({
-  id: data.id,
-  nom: data.nom,
-  email: data.email,
-  telephone: data.telephone,
-  entreprise: data.entreprise,
-  sujet: data.sujet,
-  message: data.message,
+export const toContact = (data: Record<string, unknown>): Contact => ({
+  id: data.id as number,
+  nom: data.nom as string,
+  email: data.email as string,
+  telephone: data.telephone as string,
+  entreprise: data.entreprise as string,
+  sujet: data.sujet as string,
+  message: data.message as string,
   lu: Boolean(data.lu),
-  created_at: data.created_at,
-  updated_at: data.updated_at,
+  created_at: data.created_at as string | undefined,
+  updated_at: data.updated_at as string | undefined,
 });

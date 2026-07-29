@@ -1,5 +1,5 @@
 import { getAxios } from "@/config/axios";
-import type { Contact, CreateContact, UpdateContact, ContactResponse, ContactsResponse } from "@/types/contact";
+import type {  CreateContact, UpdateContact, ContactResponse, ContactsResponse } from "@/types/contact";
 
 export const contactProvider = {
   // GET /api/contact - Lister tous les contacts
