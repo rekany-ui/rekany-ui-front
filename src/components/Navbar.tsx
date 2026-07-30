@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import iconImage from "../assets/images/icon.jpeg";
+import { useCart } from "@/context/useCart";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+ const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { totalItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,9 +69,18 @@ export default function Navbar() {
                   </Link>
                 );
               })}
-              <button className="btn-primary text-white px-6 py-2.5 rounded-full font-medium text-sm">
-                Commander
-              </button>
+              <Link
+                to="/panier"
+                className="relative flex h-10 w-10 items-center justify-center rounded-full text-rekany-gray transition-colors hover:bg-rekany-cream hover:text-rekany-dark"
+                aria-label="Voir le panier"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-rekany-dark text-[10px] font-bold text-white">
+                    {totalItems}
+                  </span>
+                )}
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -106,9 +117,14 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="pt-2">
-              <button className="btn-primary w-full text-white px-6 py-2.5 rounded-full font-medium text-sm">
-                Commander
-              </button>
+              <Link
+                to="/panier"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-2 flex items-center justify-center gap-2 rounded-full bg-rekany-dark px-6 py-2.5 text-sm font-medium text-white"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                Panier {totalItems > 0 && `(${totalItems})`}
+              </Link>
             </div>
           </div>
         </div>

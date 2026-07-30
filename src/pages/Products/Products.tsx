@@ -258,7 +258,7 @@ export default function ProductsPage() {
 
                             <div className="lg:col-span-2">
                                 <label htmlFor="price" className="text-xs font-semibold text-rekany-gray/80">
-                                    Prix max : {formatPrice(maxPrice)}
+                                    Produits de qualité 
                                 </label>
                                 <input
                                     id="price"

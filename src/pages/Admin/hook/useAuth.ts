@@ -19,11 +19,6 @@ export function useAuth() {
         return null;
       }
 
-      const storedUser = authProvider.getUserFromStorage();
-      if (storedUser) {
-        return storedUser;
-      }
-
       try {
         const userData = await authProvider.me();
         authProvider.updateUserInStorage(userData);

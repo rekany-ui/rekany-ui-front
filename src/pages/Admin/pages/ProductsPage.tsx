@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { isAxiosError } from 'axios';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ProductList } from '../components/products/ProductList';
 import { ProductForm } from '../components/products/ProductForm';
@@ -18,6 +19,20 @@ interface ProductsPageProps {
 export function ProductsPage({ showToast, toasts, removeToast }: ProductsPageProps) {
   const queryClient = useQueryClient();
 
+  const getApiErrorMessage = (error: unknown, fallback: string) => {
+    if (!isAxiosError<{ message?: string; errors?: Record<string, string[]> }>(error)) {
+      return fallback;
+    }
+
+    if (error.response?.status === 401) {
+      return 'Session expirée ou absente. Reconnectez-vous avant de publier un produit.';
+    }
+
+    const validationErrors = error.response?.data?.errors;
+    const firstValidationError = validationErrors ? Object.values(validationErrors).flat()[0] : undefined;
+    return firstValidationError || error.response?.data?.message || fallback;
+  };
+
   // États des modals
   const [formModalOpen, setFormModalOpen] = useState(false);
   const [viewModalOpen, setViewModalOpen] = useState(false);
@@ -26,6 +41,7 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formMode, setFormMode] = useState<FormMode>('create');
   const [formValues, setFormValues] = useState<Partial<Product>>({});
+  const [formError, setFormError] = useState<string | null>(null);
   const [currentViewProduct, setCurrentViewProduct] = useState<Product | null>(null);
   const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
 
@@ -45,9 +61,12 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
       showToast('Produit créé avec succès', 'success');
       setFormModalOpen(false);
       setFormValues({});
+      setFormError(null);
     },
-    onError: () => {
-      showToast("Erreur lors de la création du produit", 'error');
+    onError: (error) => {
+      const message = getApiErrorMessage(error, "Erreur lors de la création du produit");
+      setFormError(message);
+      showToast(message, 'error');
     },
   });
 
@@ -62,9 +81,12 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
       showToast('Produit modifié avec succès', 'success');
       setFormModalOpen(false);
       setFormValues({});
+      setFormError(null);
     },
-    onError: () => {
-      showToast("Erreur lors de la modification du produit", 'error');
+    onError: (error) => {
+      const message = getApiErrorMessage(error, "Erreur lors de la modification du produit");
+      setFormError(message);
+      showToast(message, 'error');
     },
   });
 
@@ -79,8 +101,8 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
       setDeleteModalOpen(false);
       setDeleteTargetId(null);
     },
-    onError: () => {
-      showToast("Erreur lors de la suppression du produit", 'error');
+    onError: (error) => {
+      showToast(getApiErrorMessage(error, "Erreur lors de la suppression du produit"), 'error');
     },
   });
 
@@ -90,6 +112,7 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
     setFormMode('create');
     setEditingId(null);
     setFormValues(getDefaultProduct());
+    setFormError(null);
     setFormModalOpen(true);
   };
 
@@ -97,6 +120,7 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
     setFormMode('edit');
     setEditingId(product.id);
     setFormValues(product);
+    setFormError(null);
     setFormModalOpen(true);
   };
 
@@ -114,6 +138,7 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
 
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setFormError(null);
     if (formMode === 'create') {
       createMutation.mutate(formValues as CreateProduct);
     } else {
@@ -198,6 +223,8 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
         onFormChange={handleFormChange}
         mode={formMode}
         editingId={editingId}
+        isSubmitting={createMutation.isPending || updateMutation.isPending}
+        errorMessage={formError}
       />
 
       <ProductDetails

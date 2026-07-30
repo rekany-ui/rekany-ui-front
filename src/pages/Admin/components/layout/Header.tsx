@@ -9,10 +9,11 @@ interface HeaderProps {
 }
 
 export function Header({ currentSection, onMenuClick, onRefresh }: HeaderProps) {
-  const titles = {
+  const titles: Record<Section, { title: string; subtitle: string }> = {
     dashboard: { title: 'Tableau de bord', subtitle: "Vue d'ensemble du système" },
     contacts: { title: 'Contacts', subtitle: 'Gestion des contacts et messages' },
     produits: { title: 'Produits', subtitle: 'Gestion du catalogue produits' },
+    commandes: { title: 'Commandes', subtitle: 'Suivi et gestion des commandes clients' },
   };
 
   const { title, subtitle } = titles[currentSection];

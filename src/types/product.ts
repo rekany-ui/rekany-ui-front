@@ -53,6 +53,7 @@ interface ApiProduct {
   disponible: boolean;
   image_url: string | null;
   description: string;
+  created_at?: string;
 }
 
 // ===== TRANSFORMATEURS =====
@@ -68,6 +69,7 @@ export const toProduct = (api: ApiProduct): Product => ({
   available: Boolean(api.disponible),
   image: api.image_url || "/images/placeholder.jpg",
   description: api.description,
+  created_at: api.created_at,
 });
 
 export const toApiProduct = (product: CreateProduct) => ({
@@ -78,7 +80,7 @@ export const toApiProduct = (product: CreateProduct) => ({
   certification: product.certification,
   origine: product.origin,
   disponible: product.available,
-  image_url: product.image,
+  image_url: product.image?.trim() || null,
   description: product.description,
 });
 

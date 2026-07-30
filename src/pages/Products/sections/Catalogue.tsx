@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Plus, MapPin } from "lucide-react";
 import { formatPrice, type Product } from "@/types/product";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "@/context/useCart";
 
 interface CatalogueProps {
   products: Product[];
@@ -24,6 +26,21 @@ interface CatalogueProps {
 }
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+
+  const handleAdd = (e: React.MouseEvent) => {
+  e.stopPropagation();
+  addToCart({
+    id: product.id,
+    name: product.name,
+    image: product.image,
+    price: product.price,
+    unit: product.unit,
+  });
+  navigate(`/produits/${product.id}#action`);
+};
+
   return (
     <motion.article
       layout
@@ -32,7 +49,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       exit={{ opacity: 0, y: -10, scale: 0.97 }}
       transition={{ duration: 0.45, delay: Math.min(index * 0.05, 0.3), ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -6 }}
-      className="group overflow-hidden rounded-[1.75rem] border border-rekany-cream bg-white p-3.5 shadow-soft transition-shadow duration-300 hover:shadow-lift"
+      onClick={() => navigate(`/produits/${product.id}`)}
+      className="group cursor-pointer overflow-hidden rounded-[1.75rem] border border-rekany-cream bg-white p-3.5 shadow-soft transition-shadow duration-300 hover:shadow-lift"
     >
       <div className="relative overflow-hidden rounded-[1.35rem] bg-rekany-beige/60">
         <img
@@ -66,6 +84,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           <button
             type="button"
             disabled={!product.available}
+            onClick={handleAdd}
             aria-label={`Ajouter ${product.name}`}
             className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-rekany-dark text-white transition-transform duration-200 hover:scale-110 hover:bg-rekany-dark/90 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
           >
@@ -201,7 +220,7 @@ export default function Catalogue({
 
           <div className="lg:col-span-2">
             <label htmlFor="price" className="text-xs font-semibold text-rekany-gray/80">
-              Prix max : {formatPrice(maxPrice)}
+              Produits de qualité 
             </label>
             <input
               id="price"

@@ -13,6 +13,8 @@ interface ProductFormProps {
   onFormChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   mode: FormMode;
   editingId: string | null;
+  isSubmitting?: boolean;
+  errorMessage?: string | null;
 }
 
 // Liste des unités disponibles
@@ -51,7 +53,9 @@ export function ProductForm({
   formValues,
   onFormChange,
   mode,
-  editingId
+  editingId,
+  isSubmitting = false,
+  errorMessage = null
 }: ProductFormProps) {
   if (!isOpen) return null;
 
@@ -70,8 +74,14 @@ export function ProductForm({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={title}>
-      <form className="p-6" onSubmit={onSubmit}>
+      <form className="p-6" onSubmit={onSubmit} noValidate>
         <div className="space-y-4">
+          {errorMessage ? (
+            <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+              {errorMessage}
+            </div>
+          ) : null}
+
           {PRODUCT_FIELDS.map((field) => {
             // Champ catégorie -> Select
             if (field.name === 'category') {
@@ -182,9 +192,11 @@ export function ProductForm({
           <Button variant="secondary" onClick={onClose}>
             Annuler
           </Button>
-          <Button variant="primary" type="submit" icon>
+          <Button variant="primary" type="submit" icon disabled={isSubmitting}>
             <FaCheckCircle className="text-xs" />
-            <span>{editingId ? 'Mettre à jour' : 'Enregistrer'}</span>
+            <span>
+              {isSubmitting ? 'Enregistrement...' : editingId ? 'Mettre à jour' : 'Enregistrer'}
+            </span>
           </Button>
         </div>
       </form>

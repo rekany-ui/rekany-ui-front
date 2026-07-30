@@ -25,7 +25,7 @@ export const authProvider = {
 
   async me(): Promise<User> {
     const { data } = await getAxios().get("/api/me");
-    return data.user;
+    return data.user ?? data;
   },
 
   isAuthenticated(): boolean {

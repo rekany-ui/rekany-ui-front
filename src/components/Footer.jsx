@@ -1,4 +1,3 @@
-import { Leaf } from "lucide-react";
 import { FiFacebook, FiInstagram, FiLinkedin, FiTwitter } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import avemaLogo from "../assets/images/AVEMA.png";
@@ -10,9 +9,9 @@ export default function Footer() {
   return (
     <footer className="bg-rekany-dark text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div>
             <div className="flex items-center space-x-3 mb-6">
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
                 <img
@@ -126,27 +125,6 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h4 className="font-poppins font-semibold text-lg mb-6">Newsletter</h4>
-            <p className="text-white/60 text-sm mb-4">
-              Recevez nos actualités et offres bio.
-            </p>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
-              <input
-                type="email"
-                placeholder="Votre email"
-                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-rekany-light transition-colors text-sm"
-              />
-              <button
-                type="submit"
-                className="w-full bg-rekany-light hover:bg-rekany-light/90 text-white font-semibold py-3 rounded-xl transition-colors text-sm"
-              >
-                S'inscrire
-              </button>
-            </form>
           </div>
         </div>
 

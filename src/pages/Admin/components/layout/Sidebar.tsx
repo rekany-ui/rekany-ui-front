@@ -1,6 +1,6 @@
 import type { Section } from '@/types';
-import { FaChartPie, FaAddressBook, FaBoxOpen, FaSignOutAlt } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { FaChartPie, FaAddressBook, FaBoxOpen, FaClipboardList, FaSignOutAlt } from 'react-icons/fa';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../hook/useAuth';
 
 interface SidebarProps {
@@ -18,18 +18,18 @@ export function Sidebar({ currentSection, onSectionChange, isOpen, onClose }: Si
     { id: 'dashboard' as Section, label: 'Tableau de bord', icon: FaChartPie },
     { id: 'contacts' as Section, label: 'Contacts', icon: FaAddressBook },
     { id: 'produits' as Section, label: 'Produits', icon: FaBoxOpen },
+    { id: 'commandes' as Section, label: 'Commandes', icon: FaClipboardList },
   ];
 
   const handleLogout = async () => {
     try {
       await logout();
-      navigate('/admin'); // Redirige vers la page de connexion
+      navigate('/admin');
     } catch (error) {
       console.error('Erreur lors de la déconnexion:', error);
     }
   };
 
-  // Récupérer les initiales du nom
   const getInitials = (name: string) => {
     if (!name) return 'U';
     return name
@@ -76,6 +76,15 @@ export function Sidebar({ currentSection, onSectionChange, isOpen, onClose }: Si
           </button>
         ))}
       </nav>
+
+      <div className="px-3 mt-2">
+        <Link
+          to="/"
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-2.5 text-left text-sm font-medium text-rekany-gray/60 transition-all hover:bg-rekany-beige hover:text-rekany-dark"
+        >
+          ← Retour au site
+        </Link>
+      </div>
 
       <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100/80 bg-white/60 backdrop-blur-sm">
         <div className="flex items-center gap-3 rounded-xl bg-rekany-beige/50 px-3 py-2.5">

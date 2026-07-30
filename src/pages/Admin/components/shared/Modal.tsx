@@ -13,7 +13,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/50 p-4 backdrop-blur-sm">
-      <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl bg-white border border-white/20 shadow-2xl">
+      <div className="relative flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white border border-white/20 shadow-2xl">
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 bg-white/90 px-6 py-4 backdrop-blur-sm">
           <h3 className="text-lg font-extrabold text-gray-900">{title}</h3>
           <Button
@@ -24,7 +24,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
             <FaTimes className="text-gray-400 hover:text-gray-600" />
           </Button>
         </div>
-        {children}
+        <div className="overflow-y-auto">{children}</div>
       </div>
     </div>
   );

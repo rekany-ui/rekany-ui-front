@@ -3,6 +3,6 @@ export type { Product, CreateProduct, UpdateProduct } from '@/types/product';
 export { toContact } from '@/types/contact';
 export { toProduct, toApiProduct, formatPrice } from '@/types/product';
 
-export type Section = 'dashboard' | 'contacts' | 'produits';
+export type Section = 'dashboard' | 'contacts' | 'produits' | 'commandes';
 export type ToastType = 'success' | 'error' | 'info' | 'warning';
 export type FormMode = 'create' | 'edit' | 'view';
