@@ -4,7 +4,7 @@ import { ContactList } from '../components/contacts/ContactList';
 import { ContactForm } from '../components/contacts/ContactForm';
 import { DeleteModal } from '../components/shared/DeleteModal';
 import { ToastContainer } from '../components/shared/ToastContainer';
-import type { Contact, FormMode, ToastType } from '@/types';
+import type { Contact, CreateContact, FormMode, ToastType } from '@/types';
 import { contactProvider } from '@/provider/contactProvider';
 import { getDefaultContact } from '../constants/contact.constants';
 import { ContactDetails } from '../components/contacts/ContactDetails';
@@ -42,7 +42,7 @@ export function ContactsPage({ showToast, toasts, removeToast }: ContactsPagePro
 
   // Mutation pour créer un contact
   const createMutation = useMutation({
-    mutationFn: (data: Partial<Contact>) => contactProvider.create(data as any),
+    mutationFn: (data: CreateContact) => contactProvider.create(data),
     onSuccess: (response) => {
       queryClient.setQueryData(['contacts'], (old: Contact[] = []) => [...old, response.data]);
       showToast('Contact créé avec succès', 'success');
@@ -113,14 +113,21 @@ export function ContactsPage({ showToast, toasts, removeToast }: ContactsPagePro
     }
   };
 
-  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (formMode === 'create') {
-      createMutation.mutate(formValues);
-    } else {
-      updateMutation.mutate({ id: editingId!, data: formValues });
-    }
-  };
+ const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  if (formMode === 'create') {
+    createMutation.mutate({
+      nom: formValues.nom ?? '',
+      email: formValues.email ?? '',
+      telephone: formValues.telephone ?? '',
+      entreprise: formValues.entreprise ?? '',
+      sujet: formValues.sujet ?? '',
+      message: formValues.message ?? '',
+    });
+  } else {
+    updateMutation.mutate({ id: editingId!, data: formValues });
+  }
+};
 
   const handleViewContact = (id: number) => {
     const contact = contacts.find((c) => c.id === id);

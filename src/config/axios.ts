@@ -14,7 +14,7 @@ export const getAxios = (): AxiosInstance => {
 
   axiosInstance.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem("authToken");
+      const token = localStorage.getItem("auth_token");
 
       const publicRoutes = ["/api/login", "/api/register"];
 

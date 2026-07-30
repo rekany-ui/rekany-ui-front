@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hook/useAuth';
+import { isAxiosError } from 'axios';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -38,9 +39,9 @@ const RegisterPage = () => {
     try {
       await register(formData);
       navigate('/admin/backoffice');
-    } catch (error: any) {
+    } catch (error) {
       // Gérer les erreurs de validation
-      if (error?.response?.data?.errors) {
+      if (isAxiosError<{ errors?: Record<string, string[]> }>(error) && error.response?.data?.errors) {
         setValidationErrors(error.response.data.errors);
       }
     }
@@ -84,9 +85,11 @@ const RegisterPage = () => {
           <div className="p-8">
             <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">Inscription</h2>
 
-            {registerError && !(registerError as any)?.response?.data?.errors && (
+           {registerError &&
+            isAxiosError<{ message?: string; errors?: Record<string, string[]> }>(registerError) &&
+            !registerError.response?.data?.errors && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
-                {(registerError as any)?.response?.data?.message || 'Erreur lors de l\'inscription'}
+                {registerError.response?.data?.message || "Erreur lors de l'inscription"}
               </div>
             )}
 

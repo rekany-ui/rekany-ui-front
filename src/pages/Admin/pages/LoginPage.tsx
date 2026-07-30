@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hook/useAuth';
+import { isAxiosError } from 'axios';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -75,7 +76,9 @@ const LoginPage = () => {
 
             {loginError && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
-                {(loginError as any)?.response?.data?.message || 'Erreur lors de la connexion'}
+                {isAxiosError<{ message?: string }>(loginError) && loginError.response?.data?.message
+                ? loginError.response.data.message
+                : 'Erreur lors de la connexion'}
               </div>
             )}
 

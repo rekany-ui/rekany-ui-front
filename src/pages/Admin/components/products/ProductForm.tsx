@@ -170,7 +170,7 @@ export function ProductForm({
                   value={String(formValues[field.name] ?? '')}
                   onChange={onFormChange}
                   required={field.required}
-                  step={(field as any).step}
+                  step={'step' in field ? field.step : undefined}
                   placeholder={field.placeholder}
                   className="w-full rounded-xl border border-gray-200 bg-rekany-beige/50 px-4 py-2.5 text-sm focus:border-transparent focus:ring-2 focus:ring-rekany-light transition-shadow"
                 />

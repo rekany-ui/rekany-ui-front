@@ -34,10 +34,7 @@ export function Header({ currentSection, onMenuClick, onRefresh }: HeaderProps) 
           </div>
         </div>
         <div className="flex items-center gap-2.5">
-          <div className="hidden sm:flex items-center gap-2 rounded-xl bg-rekany-light/20 px-3.5 py-1.5 text-xs font-semibold text-rekany-dark border border-rekany-light/30">
-            <span className="status-dot online" />
-            API Connectée
-          </div>
+          
           <Button
             variant="secondary"
             onClick={onRefresh}

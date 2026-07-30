@@ -28,7 +28,7 @@ export function useAuth() {
         const userData = await authProvider.me();
         authProvider.updateUserInStorage(userData);
         return userData;
-      } catch (error) {
+      } catch {
         authProvider.clearAuthData();
         return null;
       }
