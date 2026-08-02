@@ -1,6 +1,6 @@
 import { getAxios } from "@/config/axios";
 import type { Product, CreateProduct, UpdateProduct } from "@/types/product";
-import { toProduct, toApiProduct } from "@/types/product";
+import { toProduct } from "@/types/product";
 
 export const productProvider = {
   async findAll(): Promise<Product[]> {
@@ -14,21 +14,60 @@ export const productProvider = {
   },
 
   async create(data: CreateProduct): Promise<Product> {
-    const payload = toApiProduct(data);
-    const { data: result } = await getAxios().post("/api/produit", payload);
+    const formData = new FormData();
+
+    formData.append('nom', data.name);
+    formData.append('categorie', data.category);
+    formData.append('prix', String(data.price));
+    formData.append('unite', data.unit);
+    formData.append('certification', data.certification);
+    formData.append('origine', data.origin);
+    formData.append('disponible', data.available ? '1' : '0');
+    formData.append('description', data.description);
+
+    if (data.image) {
+      formData.append('image', data.image);
+    }
+
+    const { data: result } = await getAxios().post("/api/produit", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
     return toProduct(result.data);
   },
 
   async update(id: number, data: UpdateProduct): Promise<Product> {
-    const payload = toApiProduct(data as CreateProduct);
-    const { data: result } = await getAxios().put(`/api/produit/${id}`, payload);
+    const formData = new FormData();
+
+    if (data.name !== undefined) formData.append('nom', data.name);
+    if (data.category !== undefined) formData.append('categorie', data.category);
+    if (data.price !== undefined) formData.append('prix', String(data.price));
+    if (data.unit !== undefined) formData.append('unite', data.unit);
+    if (data.certification !== undefined) formData.append('certification', data.certification);
+    if (data.origin !== undefined) formData.append('origine', data.origin);
+    if (data.available !== undefined) formData.append('disponible', data.available ? '1' : '0');
+    if (data.description !== undefined) formData.append('description', data.description);
+
+    if (data.image) {
+      formData.append('image', data.image);
+    }
+
+    formData.append('_method', 'PUT');
+
+    const { data: result } = await getAxios().post(`/api/produit/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
     return toProduct(result.data);
   },
 
   async delete(id: number): Promise<void> {
     await getAxios().delete(`/api/produit/${id}`);
   },
-
 
   async getCategories(): Promise<string[]> {
     const products = await this.findAll();
@@ -54,4 +93,3 @@ export const productProvider = {
     return Math.max(...prices, 50000);
   },
 };
-

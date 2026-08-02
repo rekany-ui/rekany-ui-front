@@ -5,7 +5,7 @@ import { ProductForm } from '../components/products/ProductForm';
 import { ProductDetails } from '../components/products/ProductDetails';
 import { DeleteModal } from '../components/shared/DeleteModal';
 import { ToastContainer } from '../components/shared/ToastContainer';
-import type { Product, FormMode, ToastType, CreateProduct } from '@/types';
+import type { Product, FormMode, ToastType, CreateProduct, UpdateProduct } from '@/types';
 import { productProvider } from '@/provider/productProvider';
 import { getDefaultProduct } from '../constants/product.constants';
 
@@ -17,43 +17,47 @@ interface ProductsPageProps {
 
 export function ProductsPage({ showToast, toasts, removeToast }: ProductsPageProps) {
   const queryClient = useQueryClient();
-
-  // États des modals
   const [formModalOpen, setFormModalOpen] = useState(false);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formMode, setFormMode] = useState<FormMode>('create');
   const [formValues, setFormValues] = useState<Partial<Product>>({});
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [currentViewProduct, setCurrentViewProduct] = useState<Product | null>(null);
   const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
 
-  // ====== REACT QUERY ======
 
-  // Query pour récupérer tous les produits
   const { data: products = [], isLoading } = useQuery({
     queryKey: ['products'],
     queryFn: () => productProvider.findAll(),
   });
 
-  // Mutation pour créer un produit
   const createMutation = useMutation({
     mutationFn: (data: CreateProduct) => productProvider.create(data),
+
     onSuccess: (newProduct) => {
       queryClient.setQueryData(['products'], (old: Product[] = []) => [...old, newProduct]);
       showToast('Produit créé avec succès', 'success');
       setFormModalOpen(false);
       setFormValues({});
+      setImageFile(null);
+      setImagePreview(null);
     },
-    onError: () => {
-      showToast("Erreur lors de la création du produit", 'error');
+
+    onError: (error: any) => {
+      console.error('Erreur création:', error);
+      if (error.response) {
+        showToast(error.response.data?.message || 'Erreur lors de la création', 'error');
+      } else {
+        showToast('Erreur réseau lors de la création', 'error');
+      }
     },
   });
 
-  // Mutation pour modifier un produit
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: number; data: Partial<Product> }) =>
+    mutationFn: ({ id, data }: { id: number; data: UpdateProduct }) =>
       productProvider.update(id, data),
     onSuccess: (updatedProduct) => {
       queryClient.setQueryData(['products'], (old: Product[] = []) =>
@@ -62,13 +66,20 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
       showToast('Produit modifié avec succès', 'success');
       setFormModalOpen(false);
       setFormValues({});
+      setImageFile(null);
+      setImagePreview(null);
     },
-    onError: () => {
-      showToast("Erreur lors de la modification du produit", 'error');
+    onError: (error: any) => {
+      console.error('Erreur mise à jour:', error);
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        showToast(error.response.data?.message || 'Erreur lors de la modification', 'error');
+      } else {
+        showToast('Erreur réseau lors de la modification', 'error');
+      }
     },
   });
 
-  // Mutation pour supprimer un produit
   const deleteMutation = useMutation({
     mutationFn: (id: number) => productProvider.delete(id),
     onSuccess: (_, id) => {
@@ -79,17 +90,18 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
       setDeleteModalOpen(false);
       setDeleteTargetId(null);
     },
-    onError: () => {
-      showToast("Erreur lors de la suppression du produit", 'error');
+    onError: (error: any) => {
+      console.error('Erreur suppression:', error);
+      showToast('Erreur lors de la suppression', 'error');
     },
   });
-
-  // ====== HANDLERS ======
 
   const handleOpenCreateForm = () => {
     setFormMode('create');
     setEditingId(null);
     setFormValues(getDefaultProduct());
+    setImageFile(null);
+    setImagePreview(null);
     setFormModalOpen(true);
   };
 
@@ -97,6 +109,8 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
     setFormMode('edit');
     setEditingId(product.id);
     setFormValues(product);
+    setImagePreview(product.image || null);
+    setImageFile(null);
     setFormModalOpen(true);
   };
 
@@ -112,12 +126,62 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImageFile(null);
+      if (formMode === 'edit' && formValues.image) {
+        setImagePreview(formValues.image);
+      } else {
+        setImagePreview(null);
+      }
+    }
+  };
+
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formMode === 'create') {
-      createMutation.mutate(formValues as CreateProduct);
+      if (!imageFile) {
+        showToast('Veuillez sélectionner une image', 'error');
+        return;
+      }
+
+      const createData: CreateProduct = {
+        name: formValues.name || '',
+        category: formValues.category || '',
+        price: formValues.price || 0,
+        unit: formValues.unit || '',
+        certification: formValues.certification || '',
+        origin: formValues.origin || '',
+        available: formValues.available || false,
+        image: imageFile,
+        description: formValues.description || '',
+      };
+      createMutation.mutate(createData);
     } else {
-      updateMutation.mutate({ id: Number(editingId), data: formValues });
+      const updateData: UpdateProduct = {};
+
+      if (formValues.name !== undefined) updateData.name = formValues.name;
+      if (formValues.category !== undefined) updateData.category = formValues.category;
+      if (formValues.price !== undefined) updateData.price = formValues.price;
+      if (formValues.unit !== undefined) updateData.unit = formValues.unit;
+      if (formValues.certification !== undefined) updateData.certification = formValues.certification;
+      if (formValues.origin !== undefined) updateData.origin = formValues.origin;
+      if (formValues.available !== undefined) updateData.available = formValues.available;
+      if (formValues.description !== undefined) updateData.description = formValues.description;
+
+      if (imageFile) {
+        updateData.image = imageFile;
+      }
+
+      updateMutation.mutate({ id: Number(editingId), data: updateData });
     }
   };
 
@@ -192,10 +256,16 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
 
       <ProductForm
         isOpen={formModalOpen}
-        onClose={() => setFormModalOpen(false)}
+        onClose={() => {
+          setFormModalOpen(false);
+          setImageFile(null);
+          setImagePreview(null);
+        }}
         onSubmit={handleSubmitForm}
         formValues={formValues}
         onFormChange={handleFormChange}
+        onFileChange={handleFileChange}
+        imagePreview={imagePreview}
         mode={formMode}
         editingId={editingId}
       />

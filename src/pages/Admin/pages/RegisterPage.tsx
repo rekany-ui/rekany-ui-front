@@ -1,4 +1,3 @@
-// admin/pages/RegisterPage.tsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hook/useAuth';
@@ -21,7 +20,6 @@ const RegisterPage = () => {
       ...prev,
       [name]: value,
     }));
-    // Clear validation error for this field
     if (validationErrors[name]) {
       setValidationErrors((prev) => {
         const newErrors = { ...prev };
@@ -39,7 +37,6 @@ const RegisterPage = () => {
       await register(formData);
       navigate('/admin/backoffice');
     } catch (error: any) {
-      // Gérer les erreurs de validation
       if (error?.response?.data?.errors) {
         setValidationErrors(error.response.data.errors);
       }
@@ -50,7 +47,6 @@ const RegisterPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 p-4">
       <div className="w-full max-w-md">
         <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 overflow-hidden">
-          {/* Header */}
           <div className="relative h-32 bg-gradient-to-r from-green-700 to-emerald-600 flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0 opacity-20">
               <svg className="w-full h-full" viewBox="0 0 400 128" fill="none">
@@ -271,7 +267,6 @@ const RegisterPage = () => {
                 )}
               </button>
 
-              {/* Lien vers la connexion */}
               <p className="text-center text-sm text-gray-600">
                 Déjà un compte ?{' '}
                 <Link to="/admin" className="text-green-600 hover:text-green-700 font-medium transition-colors">
