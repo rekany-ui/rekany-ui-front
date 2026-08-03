@@ -1,7 +1,3 @@
-// src/types/product.ts
-
-// ===== TYPES PRINCIPAUX =====
-
 export interface Product {
   id: string;
   name: string;
@@ -14,6 +10,7 @@ export interface Product {
   image: string;
   description: string;
   created_at?: string;
+  updated_at?: string;
 }
 
 export interface CreateProduct {
@@ -24,7 +21,7 @@ export interface CreateProduct {
   certification: string;
   origin: string;
   available: boolean;
-  image: string;
+  image: File;
   description: string;
 }
 
@@ -36,11 +33,10 @@ export interface UpdateProduct {
   certification?: string;
   origin?: string;
   available?: boolean;
-  image?: string;
+  image?: File | null;
   description?: string;
 }
 
-// ===== TYPES API (interne) =====
 
 interface ApiProduct {
   id: number;
@@ -54,9 +50,9 @@ interface ApiProduct {
   image_url: string | null;
   description: string;
   created_at?: string;
+  updated_at?: string;
 }
 
-// ===== TRANSFORMATEURS =====
 
 export const toProduct = (api: ApiProduct): Product => ({
   id: String(api.id),
@@ -70,6 +66,7 @@ export const toProduct = (api: ApiProduct): Product => ({
   image: api.image_url || "/images/placeholder.jpg",
   description: api.description,
   created_at: api.created_at,
+  updated_at: api.updated_at,
 });
 
 export const toApiProduct = (product: CreateProduct) => ({
@@ -80,11 +77,10 @@ export const toApiProduct = (product: CreateProduct) => ({
   certification: product.certification,
   origine: product.origin,
   disponible: product.available,
-  image_url: product.image?.trim() || null,
+  image: product.image,
   description: product.description,
 });
 
-// ===== UTILITAIRES =====
 
 export const formatPrice = (price: number) =>
   new Intl.NumberFormat("fr-MG", {

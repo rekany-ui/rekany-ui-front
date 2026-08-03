@@ -1,4 +1,3 @@
-// admin/pages/LoginPage.tsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hook/useAuth';
@@ -206,7 +205,6 @@ const LoginPage = () => {
                 )}
               </button>
 
-              {/* Lien vers l'inscription */}
               <p className="text-center text-sm text-gray-600">
                 Pas encore de compte ?{' '}
                 <Link to="/admin/register" className="text-green-600 hover:text-green-700 font-medium transition-colors">

@@ -1,8 +1,6 @@
-// admin/pages/RegisterPage.tsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hook/useAuth';
-import { isAxiosError } from 'axios';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +20,6 @@ const RegisterPage = () => {
       ...prev,
       [name]: value,
     }));
-    // Clear validation error for this field
     if (validationErrors[name]) {
       setValidationErrors((prev) => {
         const newErrors = { ...prev };
@@ -39,9 +36,8 @@ const RegisterPage = () => {
     try {
       await register(formData);
       navigate('/admin/backoffice');
-    } catch (error) {
-      // Gérer les erreurs de validation
-      if (isAxiosError<{ errors?: Record<string, string[]> }>(error) && error.response?.data?.errors) {
+    } catch (error: any) {
+      if (error?.response?.data?.errors) {
         setValidationErrors(error.response.data.errors);
       }
     }
@@ -51,7 +47,6 @@ const RegisterPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 p-4">
       <div className="w-full max-w-md">
         <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 overflow-hidden">
-          {/* Header */}
           <div className="relative h-32 bg-gradient-to-r from-green-700 to-emerald-600 flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0 opacity-20">
               <svg className="w-full h-full" viewBox="0 0 400 128" fill="none">
@@ -85,11 +80,9 @@ const RegisterPage = () => {
           <div className="p-8">
             <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">Inscription</h2>
 
-           {registerError &&
-            isAxiosError<{ message?: string; errors?: Record<string, string[]> }>(registerError) &&
-            !registerError.response?.data?.errors && (
+            {registerError && !(registerError as any)?.response?.data?.errors && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
-                {registerError.response?.data?.message || "Erreur lors de l'inscription"}
+                {(registerError as any)?.response?.data?.message || 'Erreur lors de l\'inscription'}
               </div>
             )}
 
@@ -274,7 +267,6 @@ const RegisterPage = () => {
                 )}
               </button>
 
-              {/* Lien vers la connexion */}
               <p className="text-center text-sm text-gray-600">
                 Déjà un compte ?{' '}
                 <Link to="/admin" className="text-green-600 hover:text-green-700 font-medium transition-colors">

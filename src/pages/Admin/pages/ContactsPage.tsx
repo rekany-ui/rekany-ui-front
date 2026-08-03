@@ -18,7 +18,6 @@ interface ContactsPageProps {
 export function ContactsPage({ showToast, toasts, removeToast }: ContactsPageProps) {
   const queryClient = useQueryClient();
 
-  // États des modals
   const [formModalOpen, setFormModalOpen] = useState(false);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -29,18 +28,15 @@ export function ContactsPage({ showToast, toasts, removeToast }: ContactsPagePro
   const [currentViewContact, setCurrentViewContact] = useState<Contact | null>(null);
   const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
 
-  // ====== REACT QUERY ======
 
-  // Query pour récupérer tous les contacts
   const { data: contacts = [], isLoading } = useQuery({
     queryKey: ['contacts'],
     queryFn: async () => {
       const response = await contactProvider.findAll();
-      return response.data; // Déjà typé Contact[]
+      return response.data;
     },
   });
 
-  // Mutation pour créer un contact
   const createMutation = useMutation({
     mutationFn: (data: CreateContact) => contactProvider.create(data),
     onSuccess: (response) => {
@@ -54,7 +50,6 @@ export function ContactsPage({ showToast, toasts, removeToast }: ContactsPagePro
     },
   });
 
-  // Mutation pour modifier un contact
   const updateMutation = useMutation({
     mutationFn: ({ id, data }: { id: number; data: Partial<Contact> }) =>
       contactProvider.update(id, data),
@@ -71,7 +66,6 @@ export function ContactsPage({ showToast, toasts, removeToast }: ContactsPagePro
     },
   });
 
-  // Mutation pour supprimer un contact
   const deleteMutation = useMutation({
     mutationFn: (id: number) => contactProvider.delete(id),
     onSuccess: (_, id) => {
@@ -87,7 +81,6 @@ export function ContactsPage({ showToast, toasts, removeToast }: ContactsPagePro
     },
   });
 
-  // ====== HANDLERS ======
 
   const handleOpenCreateForm = () => {
     setFormMode('create');
@@ -179,7 +172,6 @@ export function ContactsPage({ showToast, toasts, removeToast }: ContactsPagePro
     });
   };
 
-  // Gestion du chargement
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
