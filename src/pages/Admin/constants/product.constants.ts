@@ -9,7 +9,7 @@ export const PRODUCT_FIELDS = [
   { name: 'origin', label: 'Origine', type: 'text', required: true, placeholder: 'Madagascar' },
   { name: 'available', label: 'Disponible', type: 'checkbox', required: false },
   { name: 'description', label: 'Description', type: 'textarea', required: true, placeholder: 'Description du produit...', rows: 3 },
-  { name: 'image', label: "URL de l'image", type: 'text', required: false, placeholder: 'https://example.com/image.jpg' },
+  { name: 'image', label: "Image du produit", type: 'file', required: false },
 ] as const;
 
 export const getDefaultProduct = (): Omit<Product, 'id'> => ({

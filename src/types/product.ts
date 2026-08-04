@@ -1,3 +1,5 @@
+import { Env } from "@/config/env";
+
 export interface Product {
   id: string;
   name: string;
@@ -53,6 +55,19 @@ interface ApiProduct {
   updated_at?: string;
 }
 
+const toAbsoluteImageUrl = (imageUrl: string | null): string => {
+  if (!imageUrl) return "";
+
+  if (/^(https?:)?\/\//.test(imageUrl) || imageUrl.startsWith("data:") || imageUrl.startsWith("blob:")) {
+    return imageUrl;
+  }
+
+  if (imageUrl.startsWith("/")) {
+    return `${Env.API_URL?.replace(/\/$/, "") ?? ""}${imageUrl}`;
+  }
+
+  return imageUrl;
+};
 
 export const toProduct = (api: ApiProduct): Product => ({
   id: String(api.id),
@@ -63,7 +78,7 @@ export const toProduct = (api: ApiProduct): Product => ({
   certification: api.certification,
   origin: api.origine,
   available: Boolean(api.disponible),
-  image: api.image_url || "/images/placeholder.jpg",
+  image: toAbsoluteImageUrl(api.image_url),
   description: api.description,
   created_at: api.created_at,
   updated_at: api.updated_at,
