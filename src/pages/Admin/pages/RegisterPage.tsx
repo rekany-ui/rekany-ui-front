@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 import { useAuth } from '../hook/useAuth';
+
+interface RegisterErrorResponse {
+  message?: string;
+  errors?: Record<string, string[]>;
+}
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -36,12 +42,15 @@ const RegisterPage = () => {
     try {
       await register(formData);
       navigate('/admin/backoffice');
-    } catch (error: any) {
-      if (error?.response?.data?.errors) {
-        setValidationErrors(error.response.data.errors);
+    } catch (error) {
+      const axiosError = error as AxiosError<RegisterErrorResponse>;
+      if (axiosError?.response?.data?.errors) {
+        setValidationErrors(axiosError.response.data.errors);
       }
     }
   };
+
+  const typedRegisterError = registerError as AxiosError<RegisterErrorResponse> | null;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 p-4">
@@ -80,9 +89,9 @@ const RegisterPage = () => {
           <div className="p-8">
             <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">Inscription</h2>
 
-            {registerError && !(registerError as any)?.response?.data?.errors && (
+            {typedRegisterError && !typedRegisterError?.response?.data?.errors && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
-                {(registerError as any)?.response?.data?.message || 'Erreur lors de l\'inscription'}
+                {typedRegisterError?.response?.data?.message || 'Erreur lors de l\'inscription'}
               </div>
             )}
 

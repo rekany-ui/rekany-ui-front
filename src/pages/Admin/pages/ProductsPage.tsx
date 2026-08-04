@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { ProductList } from '../components/products/ProductList';
 import { ProductForm } from '../components/products/ProductForm';
 import { ProductDetails } from '../components/products/ProductDetails';
@@ -46,7 +47,7 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
       setImagePreview(null);
     },
 
-    onError: (error: any) => {
+    onError: (error: AxiosError<{ message?: string }>) => {
       console.error('Erreur création:', error);
       if (error.response) {
         showToast(error.response.data?.message || 'Erreur lors de la création', 'error');
@@ -69,7 +70,7 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
       setImageFile(null);
       setImagePreview(null);
     },
-    onError: (error: any) => {
+    onError: (error: AxiosError<{ message?: string }>) => {
       console.error('Erreur mise à jour:', error);
       if (error.response) {
         console.error('Response data:', error.response.data);
@@ -90,7 +91,7 @@ export function ProductsPage({ showToast, toasts, removeToast }: ProductsPagePro
       setDeleteModalOpen(false);
       setDeleteTargetId(null);
     },
-    onError: (error: any) => {
+    onError: (error: AxiosError) => {
       console.error('Erreur suppression:', error);
       showToast('Erreur lors de la suppression', 'error');
     },
