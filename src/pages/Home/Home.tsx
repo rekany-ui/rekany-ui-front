@@ -1,6 +1,5 @@
 import AboutSection from "./sections/AboutSection";
 import CategoryTypeSection from "./sections/CategoryTypeSection";
-import EngraisSection from "./sections/EngraisSection";
 import Features from "./sections/Features";
 import Hero from "./sections/Hero";
 import MethodologySection from "./sections/MethodologySection";
@@ -16,7 +15,6 @@ export default function HomePage() {
             <ProductsCollection />
             <MethodologySection />
             <CategoryTypeSection />
-            <EngraisSection />
 
         </>
     );
