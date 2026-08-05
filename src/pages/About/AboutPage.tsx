@@ -2,7 +2,7 @@ import AboutDescription from "./sections/AboutDescription";
 import AboutHero from "./sections/AboutHero";
 import AboutMarket from "./sections/AboutMarket";
 import AboutTeam from "./sections/AboutTeam";
-import TestimonialsSection from "./sections/TestimonialsSection";
+import EngraisSection from "./sections/EngraisSection";
 
 export default function AboutPage() {
   return (
@@ -11,7 +11,8 @@ export default function AboutPage() {
       <AboutDescription />
       <AboutTeam />
       <AboutMarket />
-      <TestimonialsSection />
+      <EngraisSection />
+
     </>
   );
 }
