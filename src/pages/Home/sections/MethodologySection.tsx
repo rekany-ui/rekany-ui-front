@@ -6,13 +6,14 @@ import {
     Truck,
     ShoppingBag,
     Award,
+    Handshake,
 } from "lucide-react";
 
 const steps = [
     {
-        icon: Sprout,
-        title: "Culture Bio & Durable",
-        desc: "Cultivé sous serre avec des énergies renouvelables et des pratiques respectueuses de l'environnement.",
+        icon: Handshake,
+        title: "Collaboration Paysanne",
+        desc: "Travail main dans la main avec les agriculteurs locaux, respect des savoir-faire traditionnels et partage des connaissances.",
     },
     {
         icon: Users,
@@ -22,7 +23,7 @@ const steps = [
     {
         icon: ClipboardCheck,
         title: "Contrôle & Traçabilité",
-        desc: "Suivi numérique rigoureux de chaque produit, de la récolte jusqu'au consommateur final.",
+        desc: "Suivi numérique rigoureux de chaque produit, de la récolte jusqu'au consommateur final pour une transparence totale.",
     },
     {
         icon: Truck,
@@ -35,9 +36,9 @@ const steps = [
         desc: "Vente en grandes surfaces, marchés dédiés et e-commerce avec des prix adaptés au pouvoir d'achat local.",
     },
     {
-        icon: Award,
-        title: "Qualité & Certification",
-        desc: "Produits certifiés bio, garantissant la santé des consommateurs et la protection de l'environnement.",
+        icon: Sprout,
+        title: "Culture Bio & Qualité",
+        desc: "Production biologique de qualité exceptionnelle, respectueuse de l'environnement et des traditions paysannes, pour la santé des consommateurs.",
     },
 ];
 
@@ -57,7 +58,7 @@ export default function MethodologySection() {
                     </h2>
 
                     <p className="mt-4 text-rekany-gray/70 text-sm md:text-base">
-                        Un processus transparent et responsable, du producteur au consommateur, pour garantir la qualité et l'équité à chaque étape.
+                        Un processus transparent et responsable, en étroite collaboration avec les paysans, pour garantir la qualité à chaque étape.
                     </p>
                 </div>
 
@@ -100,7 +101,6 @@ export default function MethodologySection() {
                     })}
                 </div>
 
-                {/* Ligne de temps simplifiée */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -110,7 +110,7 @@ export default function MethodologySection() {
                 >
                     <div className="inline-flex items-center gap-3 rounded-full bg-rekany-orange/10 px-6 py-3 border border-rekany-orange/20">
                         <span className="text-sm font-semibold text-rekany-orange">
-                            🌱 "BIO POUR TOUS" — Homme au centre, technologie au service du bien-être
+                            🌱 "BIO & QUALITÉ POUR TOUS" — Paysans au centre, qualité au service du bien-être
                         </span>
                     </div>
                 </motion.div>

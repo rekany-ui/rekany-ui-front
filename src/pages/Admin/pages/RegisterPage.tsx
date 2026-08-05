@@ -85,7 +85,6 @@ const RegisterPage = () => {
             </div>
           </div>
 
-          {/* Form */}
           <div className="p-8">
             <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">Inscription</h2>
 
@@ -96,7 +95,6 @@ const RegisterPage = () => {
             )}
 
             <form className="space-y-4" onSubmit={handleSubmit}>
-              {/* Nom */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
                   Nom complet
@@ -133,7 +131,6 @@ const RegisterPage = () => {
                 )}
               </div>
 
-              {/* Email */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
                   Adresse e-mail
@@ -170,7 +167,6 @@ const RegisterPage = () => {
                 )}
               </div>
 
-              {/* Password */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
                   Mot de passe
@@ -207,7 +203,6 @@ const RegisterPage = () => {
                 )}
               </div>
 
-              {/* Password Confirmation */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
                   Confirmer le mot de passe
@@ -241,7 +236,6 @@ const RegisterPage = () => {
                 </div>
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={isRegistering}

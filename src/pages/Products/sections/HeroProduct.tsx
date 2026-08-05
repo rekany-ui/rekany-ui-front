@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Leaf } from "lucide-react";
-import salade2 from "@/assets/images/salade2.jpg";
+import salade2 from "@/assets/images/nosproduit.jpg";
 
 export default function HeroProduct() {
   return (
@@ -21,8 +21,7 @@ export default function HeroProduct() {
             Bonne Vie
           </h1>
           <p className="mt-6 max-w-md text-sm text-rekany-gray/80 md:text-base">
-            Une sélection biologique certifiée, cultivée par nos producteurs partenaires et
-            tracée du champ jusqu'à votre table.
+            Une sélection de qualité, issue du travail des paysans partenaires, tracée de la récolte à votre table.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a

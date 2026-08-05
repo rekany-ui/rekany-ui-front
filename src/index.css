@@ -12,7 +12,6 @@
   --rekany-fair: #D4A017;
   --rekany-marang: #EA580C;
   --rekany-orange: #F97316;
-  /* Ajout de l'orange */
 }
 
 @theme {
@@ -27,7 +26,6 @@
   --color-rekany-fair: #D4A017;
   --color-rekany-marang: #EA580C;
   --color-rekany-orange: #F97316;
-  /* Ajout de l'orange */
 
   --font-poppins: "Poppins", sans-serif;
   --font-inter: "Inter", sans-serif;

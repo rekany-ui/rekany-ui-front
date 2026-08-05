@@ -1,4 +1,3 @@
-// admin/hooks/useAuth.ts
 import { authProvider } from '@/provider/authProvider';
 import type { LoginData, RegisterData } from '@/types/auth';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -11,7 +10,6 @@ export const authKeys = {
 export function useAuth() {
   const queryClient = useQueryClient();
 
-  // Récupérer l'utilisateur connecté
   const { data: user, isLoading, error } = useQuery({
     queryKey: authKeys.me(),
     queryFn: async () => {
@@ -28,11 +26,10 @@ export function useAuth() {
         return null;
       }
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
 
-  // Mutation d'inscription
   const registerMutation = useMutation({
     mutationFn: (data: RegisterData) => authProvider.register(data),
     onSuccess: (response) => {
@@ -41,7 +38,6 @@ export function useAuth() {
     },
   });
 
-  // Mutation de connexion
   const loginMutation = useMutation({
     mutationFn: (data: LoginData) => authProvider.login(data),
     onSuccess: (response) => {
@@ -50,7 +46,6 @@ export function useAuth() {
     },
   });
 
-  // Mutation de déconnexion
   const logoutMutation = useMutation({
     mutationFn: () => authProvider.logout(),
     onSuccess: () => {

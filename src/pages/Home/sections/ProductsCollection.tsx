@@ -41,7 +41,6 @@ export default function ProductsCollection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-          {/* LEFT CONTENT */}
           <div className="lg:col-span-3 space-y-6">
             <motion.div
               initial={{ opacity: 0, y: 25 }}
@@ -63,7 +62,6 @@ export default function ProductsCollection() {
                 Sélection de fruits, légumes et produits transformés issus de l'agriculture biologique malgache. Chaque produit est certifié, traçable et issu du commerce équitable.
               </p>
 
-              {/* CTA */}
               <div className="mt-5 space-y-3">
                 <Button variant="primary" icon>
                   Voir le catalogue
@@ -77,7 +75,6 @@ export default function ProductsCollection() {
             </motion.div>
           </div>
 
-          {/* RIGHT GRID */}
           <div className="lg:col-span-9">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 

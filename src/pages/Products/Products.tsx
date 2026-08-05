@@ -20,7 +20,7 @@ const certifications = Array.from(new Set<string>(products.map((p: Product) => p
 
 const highlights = [
     { icon: Leaf, title: "100% Biologique", text: "Cultures sans intrant chimique" },
-    { icon: BadgeCheck, title: "Certifié Ecocert", text: "Contrôle qualité sur chaque lot" },
+    { icon: BadgeCheck, title: "Qualité Garantie", text: "Contrôle rigoureux sur chaque lot" },
     { icon: Sprout, title: "Producteurs locaux", text: "500+ agriculteurs partenaires" },
     { icon: Truck, title: "Livraison suivie", text: "Traçabilité QR code 24/7" },
 ];
@@ -47,8 +47,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                 />
                 {!product.available ? (
                     <span className="absolute inset-x-3 top-3 rounded-full bg-white/90 px-3 py-1 text-center text-[11px] font-semibold uppercase tracking-wider text-rekany-gray/70">
-            Rupture de stock
-          </span>
+                        Rupture de stock
+                    </span>
                 ) : null}
             </div>
 
@@ -104,7 +104,6 @@ export default function ProductsPage() {
     return (
         <div className="min-h-screen bg-rekany-beige/30 pt-20">
             <main>
-                {/* Hero */}
                 <section className="bg-rekany-cream/50 border-b border-rekany-cream">
                     <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 md:py-24 lg:grid-cols-2">
                         <motion.div
@@ -121,8 +120,7 @@ export default function ProductsPage() {
                                 Bonne Vie
                             </h1>
                             <p className="mt-6 max-w-md text-sm text-rekany-gray/80 md:text-base">
-                                Une sélection biologique certifiée, cultivée par nos producteurs partenaires et
-                                tracée du champ jusqu'à votre table.
+                                Une sélection de qualité, issue du travail des paysans partenaires, tracée de la récolte à votre table.
                             </p>
                             <div className="mt-8 flex flex-wrap gap-3">
                                 <a
@@ -164,7 +162,6 @@ export default function ProductsPage() {
                     </div>
                 </section>
 
-                {/* Highlights */}
                 <section className="border-b border-rekany-cream bg-white">
                     <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 sm:grid-cols-2 lg:grid-cols-4">
                         {highlights.map((h, i) => (
@@ -176,9 +173,9 @@ export default function ProductsPage() {
                                 transition={{ duration: 0.45, delay: i * 0.07 }}
                                 className="flex items-center gap-4"
                             >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-rekany-mint/30">
-                  <h.icon className="h-5 w-5 text-rekany-dark" aria-hidden />
-                </span>
+                                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-rekany-mint/30">
+                                    <h.icon className="h-5 w-5 text-rekany-dark" aria-hidden />
+                                </span>
                                 <div className="min-w-0">
                                     <h2 className="truncate font-poppins text-sm font-semibold text-rekany-gray">{h.title}</h2>
                                     <p className="text-xs text-rekany-gray/70">{h.text}</p>
@@ -188,7 +185,6 @@ export default function ProductsPage() {
                     </div>
                 </section>
 
-                {/* Catalogue */}
                 <section id="catalogue" className="mx-auto max-w-7xl px-5 py-16 md:py-20">
                     <p className="font-script text-2xl text-rekany-orange">Nos produits</p>
                     <div className="mt-1 flex flex-wrap items-end justify-between gap-4">
@@ -196,11 +192,10 @@ export default function ProductsPage() {
                             Notre <span className="text-rekany-dark">Catalogue Bio</span>
                         </h2>
                         <span className="text-sm text-rekany-gray/70" aria-live="polite">
-              {filtered.length} produit{filtered.length > 1 ? "s" : ""}
-            </span>
+                            {filtered.length} produit{filtered.length > 1 ? "s" : ""}
+                        </span>
                     </div>
 
-                    {/* Category pills */}
                     <div className="mt-8 flex flex-wrap gap-2">
                         {["Toutes", ...CATEGORIES].map((c) => (
                             <button
@@ -211,14 +206,13 @@ export default function ProductsPage() {
                                 className={`rounded-full px-5 py-2 text-sm font-medium transition-colors ${category === c
                                     ? "bg-rekany-dark text-white shadow-sm"
                                     : "bg-rekany-cream/80 text-rekany-gray hover:bg-rekany-mint/40 hover:text-rekany-dark"
-                                }`}
+                                    }`}
                             >
                                 {c}
                             </button>
                         ))}
                     </div>
 
-                    {/* Filters */}
                     <div className="mt-6 rounded-2xl bg-rekany-cream/60 border border-rekany-cream p-5">
                         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
                             <div className="lg:col-span-2">
@@ -258,7 +252,7 @@ export default function ProductsPage() {
 
                             <div className="lg:col-span-2">
                                 <label htmlFor="price" className="text-xs font-semibold text-rekany-gray/80">
-                                    Produits de qualité 
+                                    Produits de qualité
                                 </label>
                                 <input
                                     id="price"
@@ -301,7 +295,6 @@ export default function ProductsPage() {
                     ) : null}
                 </section>
 
-                {/* CTA band */}
                 <section className="mx-auto max-w-7xl px-5 pb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
@@ -332,12 +325,12 @@ export default function ProductsPage() {
 }
 
 function Select({
-                    id,
-                    label,
-                    value,
-                    onChange,
-                    options,
-                }: {
+    id,
+    label,
+    value,
+    onChange,
+    options,
+}: {
     id: string;
     label: string;
     value: string;

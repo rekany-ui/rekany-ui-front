@@ -47,7 +47,7 @@ function CategoryCard({ cat, index }: { cat: Category; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay: index * 0.15 }}
-      className="flex-1 min-w-[140px] max-w-[180px] mx-auto bg-rekany-white border border-rekany-cream rounded-full py-8 px-4 flex flex-col items-center gap-6 group hover:bg-rekany-white hover:border-rekany-orange transition-all duration-500 shadow-sm hover:shadow-md cursor-pointer"
+      className="flex-1 min-w-35 max-w-45 mx-auto bg-rekany-white border border-rekany-cream rounded-full py-8 px-4 flex flex-col items-center gap-6 group hover:bg-rekany-white hover:border-rekany-orange transition-all duration-500 shadow-sm hover:shadow-md cursor-pointer"
     >
       <div className="w-24 h-24 rounded-full overflow-hidden border border-rekany-cream shadow-inner">
         <img
@@ -75,7 +75,6 @@ export default function CategoryTypeSection() {
     setCurrentSlide((prev) => (prev - 1 + slideshowImages.length) % slideshowImages.length);
   };
 
-  // Auto-play
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
@@ -95,7 +94,7 @@ export default function CategoryTypeSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden shadow-xl border border-rekany-cream group"
+              className="relative aspect-16/10 rounded-[2.5rem] overflow-hidden shadow-xl border border-rekany-cream group"
             >
               <img
                 src={slideshowImages[currentSlide].src}
@@ -111,7 +110,6 @@ export default function CategoryTypeSection() {
                 </p>
               </div>
 
-              {/* Boutons navigation */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -147,8 +145,7 @@ export default function CategoryTypeSection() {
               </h2>
 
               <p className="text-rekany-gray/70 text-sm leading-relaxed max-w-lg">
-                Découvrez notre gamme de produits certifiés bio, cultivés dans le respect de l'environnement et des communautés locales.
-              </p>
+                Découvrez notre gamme de produits de qualité, cultivés en étroite collaboration avec les paysans locaux dans le respect de l'environnement.              </p>
             </motion.div>
 
             <div className="flex flex-wrap md:flex-nowrap gap-6 items-center">

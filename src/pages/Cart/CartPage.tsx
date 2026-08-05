@@ -47,7 +47,6 @@ export default function CartPage() {
       </div>
 
       <div className="mt-8 grid gap-10 md:grid-cols-3">
-        {/* Liste des articles */}
         <div className="space-y-4 md:col-span-2">
           {items.map((item) => (
             <div
@@ -102,7 +101,6 @@ export default function CartPage() {
           ))}
         </div>
 
-        {/* Résumé */}
         <div className="h-fit rounded-2xl border border-rekany-cream bg-rekany-cream/40 p-6">
           <h2 className="font-poppins text-lg font-bold text-rekany-gray">Résumé</h2>
 
@@ -116,12 +114,12 @@ export default function CartPage() {
             <span>{formatPrice(totalPrice)}</span>
           </div>
 
-         <Link
-          to="/checkout"
-          className="mt-6 block rounded-full bg-rekany-dark py-3 text-center text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
-        >
-          Passer la commande
-        </Link>
+          <Link
+            to="/checkout"
+            className="mt-6 block rounded-full bg-rekany-dark py-3 text-center text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+          >
+            Passer la commande
+          </Link>
         </div>
       </div>
     </div>

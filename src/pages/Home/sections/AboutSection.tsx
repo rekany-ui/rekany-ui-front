@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Star, Leaf, Shield, Truck } from "lucide-react";
+import { Star, Leaf, Shield, Truck, Handshake } from "lucide-react";
 
 import tomate from "@/assets/images/tomate.jpg";
 import karoty from "@/assets/images/karoty.jpg";
@@ -26,7 +26,7 @@ export default function AboutSection() {
             >
               <img
                 src={tomate}
-                alt="Produits bio Madagascar"
+                alt="Produits de qualité Madagascar"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
 
@@ -62,32 +62,32 @@ export default function AboutSection() {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-poppins font-bold text-rekany-gray leading-tight">
                 REKANY AGRI
                 <br />
-                <span className="text-rekany-light">Bio & Commerce Équitable</span>
+                <span className="text-rekany-light text-2xl sm:text-3xl lg:text-4xl">Qualité & Collaboration Paysanne</span>
               </h2>
 
               <p className="text-rekany-gray/80 text-base leading-relaxed">
-                REKANY AGRI est spécialisé dans la production et la commercialisation de produits certifiés bio, issus du commerce équitable, pour le bien-être des consommateurs malgaches et internationaux.
+                REKANY AGRI collabore étroitement avec les paysans malgaches pour produire et commercialiser des produits de qualité, issus d'une agriculture responsable, pour le bien-être des consommateurs.
               </p>
 
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <Leaf className="h-5 w-5 text-rekany-light mt-0.5 flex-shrink-0" />
                   <p className="text-rekany-gray/70 text-sm">
-                    <span className="font-semibold text-rekany-gray">Culture Bio & Durable :</span> Production sous serre pour garantir une disponibilité toute l'année, respectueuse des normes environnementales.
+                    <span className="font-semibold text-rekany-gray">Agriculture Responsable :</span> Production respectueuse de l'environnement pour garantir une disponibilité toute l'année, en harmonie avec la nature.
                   </p>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Shield className="h-5 w-5 text-rekany-light mt-0.5 flex-shrink-0" />
+                  <Handshake className="h-5 w-5 text-rekany-light mt-0.5 flex-shrink-0" />
                   <p className="text-rekany-gray/70 text-sm">
-                    <span className="font-semibold text-rekany-gray">Certification & Traçabilité :</span> Processus de traçabilité numérique rigoureux garantissant l'authenticité et la qualité de chaque produit.
+                    <span className="font-semibold text-rekany-gray">Collaboration Paysanne :</span> Travail main dans la main avec les agriculteurs locaux, respect des savoir-faire traditionnels et partage des connaissances.
                   </p>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <Truck className="h-5 w-5 text-rekany-light mt-0.5 flex-shrink-0" />
                   <p className="text-rekany-gray/70 text-sm">
-                    <span className="font-semibold text-rekany-gray">Logistique & Commerce Équitable :</span> Circuit court et commerce équitable du paysan jusqu'au consommateur, avec suivi numérique.
+                    <span className="font-semibold text-rekany-gray">Logistique & Circuit Court :</span> De la récolte chez le paysan jusqu'au consommateur, avec un suivi transparent et un partenariat équitable.
                   </p>
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function AboutSection() {
               >
                 <img
                   src={img}
-                  alt="Produits naturels Madagascar"
+                  alt="Produits de Madagascar"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition" />
