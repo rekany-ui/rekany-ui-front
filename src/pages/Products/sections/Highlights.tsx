@@ -3,7 +3,7 @@ import { BadgeCheck, Leaf, Sprout, Truck } from "lucide-react";
 
 const highlights = [
   { icon: Leaf, title: "100% Biologique", text: "Cultures sans intrant chimique" },
-  { icon: BadgeCheck, title: "Certifié Ecocert", text: "Contrôle qualité sur chaque lot" },
+  { icon: BadgeCheck, title: "Qualité Garantie", text: "Contrôle rigoureux sur chaque lot" },
   { icon: Sprout, title: "Producteurs locaux", text: "500+ agriculteurs partenaires" },
   { icon: Truck, title: "Livraison suivie", text: "Traçabilité QR code 24/7" },
 ];

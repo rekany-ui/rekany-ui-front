@@ -31,7 +31,6 @@ export interface UpdateContact {
   lu?: boolean;
 }
 
-// ===== TYPES API =====
 
 export interface ContactResponse {
   success: boolean;
@@ -45,7 +44,6 @@ export interface ContactsResponse {
   message?: string;
 }
 
-// ===== UTILITAIRES =====
 
 export const toContact = (data: Record<string, unknown>): Contact => ({
   id: data.id as number,

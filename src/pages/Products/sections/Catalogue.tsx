@@ -30,16 +30,16 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
   const { addToCart } = useCart();
 
   const handleAdd = (e: React.MouseEvent) => {
-  e.stopPropagation();
-  addToCart({
-    id: product.id,
-    name: product.name,
-    image: product.image,
-    price: product.price,
-    unit: product.unit,
-  });
-  navigate(`/produits/${product.id}#action`);
-};
+    e.stopPropagation();
+    addToCart({
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      price: product.price,
+      unit: product.unit,
+    });
+    navigate(`/produits/${product.id}#action`);
+  };
 
   return (
     <motion.article
@@ -162,7 +162,6 @@ export default function Catalogue({
         </span>
       </div>
 
-      {/* Category pills */}
       <div className="mt-8 flex flex-wrap gap-2">
         {["Toutes", ...categories].map((c) => (
           <button
@@ -171,8 +170,8 @@ export default function Catalogue({
             onClick={() => setCategory(c)}
             aria-pressed={category === c}
             className={`rounded-full px-5 py-2 text-sm font-medium transition-colors ${category === c
-                ? "bg-rekany-dark text-white shadow-sm"
-                : "bg-rekany-cream/80 text-rekany-gray hover:bg-rekany-mint/40 hover:text-rekany-dark"
+              ? "bg-rekany-dark text-white shadow-sm"
+              : "bg-rekany-cream/80 text-rekany-gray hover:bg-rekany-mint/40 hover:text-rekany-dark"
               }`}
           >
             {c}
@@ -180,7 +179,6 @@ export default function Catalogue({
         ))}
       </div>
 
-      {/* Filters */}
       <div className="mt-6 rounded-2xl bg-rekany-cream/60 border border-rekany-cream p-5">
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
@@ -220,7 +218,7 @@ export default function Catalogue({
 
           <div className="lg:col-span-2">
             <label htmlFor="price" className="text-xs font-semibold text-rekany-gray/80">
-              Produits de qualité 
+              Produits de qualité
             </label>
             <input
               id="price"

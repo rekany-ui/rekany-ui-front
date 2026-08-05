@@ -39,7 +39,6 @@ const LoginPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 p-4">
       <div className="w-full max-w-md">
         <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 overflow-hidden">
-          {/* Header */}
           <div className="relative h-32 bg-gradient-to-r from-green-700 to-emerald-600 flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0 opacity-20">
               <svg className="w-full h-full" viewBox="0 0 400 128" fill="none">
@@ -69,20 +68,18 @@ const LoginPage = () => {
             </div>
           </div>
 
-          {/* Form */}
           <div className="p-8">
             <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">Connexion</h2>
 
             {loginError && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
                 {isAxiosError<{ message?: string }>(loginError) && loginError.response?.data?.message
-                ? loginError.response.data.message
-                : 'Erreur lors de la connexion'}
+                  ? loginError.response.data.message
+                  : 'Erreur lors de la connexion'}
               </div>
             )}
 
             <form className="space-y-5" onSubmit={handleSubmit}>
-              {/* Email */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
                   Adresse e-mail
@@ -115,7 +112,6 @@ const LoginPage = () => {
                 </div>
               </div>
 
-              {/* Password */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
                   Mot de passe
@@ -148,7 +144,6 @@ const LoginPage = () => {
                 </div>
               </div>
 
-              {/* Remember & Forgot */}
               <div className="flex items-center justify-between text-sm">
                 <label className="flex items-center gap-2 cursor-pointer group">
                   <input
@@ -170,7 +165,6 @@ const LoginPage = () => {
                 </a>
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={isLoggingIn}
@@ -214,12 +208,12 @@ const LoginPage = () => {
             </form>
           </div>
         </div>
-         <Link
+        <Link
           to="/"
           className="mt-6 flex items-center justify-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors"
         >
           ← Retour au site
-        </Link>       
+        </Link>
         <p className="text-center text-xs text-gray-500 mt-6">
           © 2026 REKANY AGRI — Tous droits réservés
         </p>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import tomate from "/src/assets/images/tomate.jpg"
+import tomate from "/src/assets/images/apropos.jpg"
 import { Leaf, Shield, Users } from "lucide-react";
 
 export default function AboutHero() {
@@ -22,8 +22,7 @@ export default function AboutHero() {
               <span className="text-rekany-orange">Bio & Commerce Équitable</span>
             </h1>
             <p className="text-rekany-gray/70 text-lg leading-relaxed max-w-lg">
-              Fournir des produits certifiés bio à la population malgache prioritairement et à l'export,
-              dans un modèle économique construit sur le commerce équitable.
+              Fournir des produits bio et de qualité à la population malgache prioritairement et à l'export, dans un modèle économique construit sur le partenariat avec les paysans.
             </p>
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center gap-2 text-sm text-rekany-gray/60">
@@ -31,8 +30,8 @@ export default function AboutHero() {
                 <span>100% Bio</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-rekany-gray/60">
-                <Shield className="h-4 w-4 text-rekany-orange" />
-                <span>Certifié</span>
+                <Users className="h-4 w-4 text-rekany-orange" />
+                <span>Partenariat paysan</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-rekany-gray/60">
                 <Users className="h-4 w-4 text-rekany-orange" />
@@ -54,7 +53,7 @@ export default function AboutHero() {
               />
             </div>
             <div className="absolute -bottom-4 -right-4 bg-rekany-orange text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
-              🌿 Bio Certifié
+              🌿 Bio & Qualité
             </div>
           </motion.div>
         </div>

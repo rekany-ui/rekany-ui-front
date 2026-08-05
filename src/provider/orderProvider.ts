@@ -31,7 +31,6 @@ export const orderProvider = {
     return result.data;
   },
 
-  // --- Admin ---
   async findAll(): Promise<Order[]> {
     const { data } = await getAxios().get("/api/order");
     return data.data;

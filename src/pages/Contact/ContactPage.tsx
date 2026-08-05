@@ -156,7 +156,6 @@ export default function ContactPage() {
         <div className="absolute bottom-0 left-1/3 h-[380px] w-[380px] rounded-full bg-rekany-mint/15 blur-3xl" />
       </div>
 
-      {/* Hero Section */}
       <section className="relative overflow-hidden mx-4 sm:mx-6 lg:mx-8 rounded-3xl pt-14 pb-20 lg:pt-20 lg:pb-28">
         <div className="absolute inset-0 -z-10">
           <img
@@ -404,7 +403,6 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  {/* Affichage de l'erreur */}
                   {error && (
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
@@ -453,7 +451,6 @@ export default function ContactPage() {
           </motion.div>
         </div>
 
-        {/* Map & Office Location */}
         <motion.div
           initial={reduce ? undefined : { opacity: 0, y: 30 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -501,7 +498,6 @@ export default function ContactPage() {
         </motion.div>
       </section>
 
-      {/* Floating WhatsApp Button */}
       <a
         href="https://wa.me/261320740006"
         target="_blank"

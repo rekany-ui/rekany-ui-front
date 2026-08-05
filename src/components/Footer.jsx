@@ -10,7 +10,6 @@ export default function Footer() {
     <footer className="bg-rekany-dark text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-          {/* Brand */}
           <div>
             <div className="flex items-center space-x-3 mb-6">
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
@@ -58,7 +57,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Navigation */}
           <div>
             <h4 className="font-poppins font-semibold text-lg mb-6">Navigation</h4>
             <ul className="space-y-3 text-white/60 text-sm">
@@ -95,7 +93,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Produits */}
           <div>
             <h4 className="font-poppins font-semibold text-lg mb-6">Nos Produits</h4>
             <ul className="space-y-3 text-white/60 text-sm">
@@ -128,7 +125,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Section Partenaires */}
         <div className="border-t border-white/10 pt-8 mb-8">
           <h4 className="font-poppins font-semibold text-lg text-center mb-6">
             Nos Partenaires

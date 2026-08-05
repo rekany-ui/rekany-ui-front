@@ -5,7 +5,7 @@ import iconImage from "../assets/images/icon.jpeg";
 import { useCart } from "@/context/useCart";
 
 export default function Navbar() {
- const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { totalItems } = useCart();
@@ -38,7 +38,6 @@ export default function Navbar() {
       <div className="glass-card border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            {/* Logo */}
             <Link to="/" className="flex items-center space-x-3">
               <div className="w-15 h-15 rounded-full bg-gradient-to-br from-rekany-dark to-rekany-light flex items-center justify-center overflow-hidden">
                 <img
@@ -52,7 +51,6 @@ export default function Navbar() {
               </span>
             </Link>
 
-            {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
@@ -83,7 +81,6 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile menu button */}
             <button
               className="md:hidden text-rekany-gray p-2 focus:outline-none"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -99,7 +96,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden glass-card border-t border-white/20">
           <div className="px-4 pt-2 pb-6 space-y-2">

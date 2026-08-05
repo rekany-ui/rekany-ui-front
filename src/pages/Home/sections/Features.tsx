@@ -1,27 +1,27 @@
 import { motion } from "framer-motion";
-import { Truck, ShieldCheck, Award, Sprout } from "lucide-react";
+import { Truck, ShieldCheck, Award, Sprout, Handshake } from "lucide-react";
 
 export default function Features() {
   const items = [
     {
       icon: Truck,
       title: "Logistique & Traçabilité",
-      desc: "Suivi numérique de la livraison, du champ jusqu'au consommateur. Circuit court et commerce équitable pour une transparence totale.",
+      desc: "Suivi numérique de la livraison, du champ jusqu'au consommateur. Circuit court et partenariat équitable avec les paysans pour une transparence totale.",
     },
     {
-      icon: Sprout,
-      title: "Culture Bio & Durable",
-      desc: "Production sous serre pour garantir une disponibilité toute l'année, respectueuse des normes environnementales et des énergies renouvelables.",
+      icon: Handshake,
+      title: "Collaboration Paysanne",
+      desc: "Travail main dans la main avec les agriculteurs malgaches pour une production de qualité, respectueuse des savoir-faire locaux et des traditions.",
     },
     {
       icon: ShieldCheck,
-      title: "Certification & Traçabilité",
-      desc: "Produits certifiés bio avec un processus de traçabilité numérique rigoureux, garantissant l'authenticité et la qualité de chaque récolte.",
+      title: "Qualité & Contrôle",
+      desc: "Produits de qualité avec un processus de contrôle rigoureux, garantissant l'authenticité et l'excellence de chaque récolte.",
     },
     {
       icon: Award,
       title: "Santé & Engagement Social",
-      desc: "Placer l'Homme au centre de nos préoccupations. Lutter contre la malnutrition en offrant des produits sains et équitables à tous.",
+      desc: "Placer l'Homme et les paysans au centre de nos préoccupations. Lutter contre la malnutrition en offrant des produits sains et de qualité à tous.",
     },
   ];
 
