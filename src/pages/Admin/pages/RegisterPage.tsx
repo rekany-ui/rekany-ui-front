@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { useAuth } from '../hook/useAuth';
 
@@ -9,16 +9,28 @@ interface RegisterErrorResponse {
 }
 
 const RegisterPage = () => {
+  const { user, isLoading, register, isRegistering, registerError } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
   });
-
   const [validationErrors, setValidationErrors] = useState<Record<string, string[]>>({});
-  const navigate = useNavigate();
-  const { register, isRegistering, registerError } = useAuth();
+
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="spinner mx-auto" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/admin" replace />;
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

@@ -6,6 +6,7 @@ import fruit2 from "@/assets/images/fruit2.jpg";
 
 import ProductCard from "../../../components/ui/ProductCard";
 import Button from "../../../components/ui/Button";
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -63,14 +64,16 @@ export default function ProductsCollection() {
               </p>
 
               <div className="mt-5 space-y-3">
-                <Button variant="primary" icon>
-                  Voir le catalogue
-                </Button>
+                <Link to="/produits">
+                  <Button variant="primary" icon>
+                    Voir le catalogue
+                  </Button>
+                </Link>
               </div>
 
               <div className="mt-4 flex items-center gap-2 text-xs text-rekany-orange">
                 <span className="inline-block h-2 w-2 rounded-full bg-rekany-orange" />
-                <span>Certification bio & commerce équitable</span>
+                <span>Produit de qualité  & commerce équitable</span>
               </div>
             </motion.div>
           </div>
