@@ -10,8 +10,8 @@ export default function HomePage() {
     return (
         <>
             <Hero />
-            <Features />
             <AboutSection />
+            <Features />
             <ProductsCollection />
             <MethodologySection />
             <CategoryTypeSection />

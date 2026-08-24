@@ -142,7 +142,7 @@ export default function Hero() {
                   <h3 className="text-white font-semibold text-xl">
                     Qualité & Collaboration
                   </h3>
-                  <p className="text-sm text-white/50">
+                  <p className="text-lg text-white/50">
                     Récolte locale, collaboration paysanne
                   </p>
                 </div>
