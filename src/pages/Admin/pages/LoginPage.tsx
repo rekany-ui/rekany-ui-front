@@ -198,13 +198,6 @@ const LoginPage = () => {
                   'Se connecter'
                 )}
               </button>
-
-              <p className="text-center text-sm text-gray-600">
-                Pas encore de compte ?{' '}
-                <Link to="/admin/register" className="text-green-600 hover:text-green-700 font-medium transition-colors">
-                  Créer un compte
-                </Link>
-              </p>
             </form>
           </div>
         </div>

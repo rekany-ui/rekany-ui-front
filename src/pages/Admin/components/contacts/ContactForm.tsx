@@ -71,7 +71,7 @@ export function ContactForm({
           })}
         </div>
         <div className="mt-6 flex justify-end gap-3 border-t border-gray-100 pt-4">
-          <Button variant="secondary" onClick={onClose}>
+          <Button variant="primary" onClick={onClose}>
             Annuler
           </Button>
           <Button variant="primary" type="submit" icon>

@@ -16,7 +16,7 @@ export const getAxios = (): AxiosInstance => {
     (config) => {
       const token = localStorage.getItem("auth_token");
 
-      const publicRoutes = ["/api/login", "/api/register"];
+      const publicRoutes = ["/api/login"];
 
       if (token && !publicRoutes.includes(config.url ?? "")) {
         config.headers.Authorization = `Bearer ${token}`;

@@ -1,6 +1,7 @@
 import type { Section } from '@/types';
-import { FaBars, FaSyncAlt } from 'react-icons/fa';
+import { FaBars, FaSyncAlt, FaUserPlus } from 'react-icons/fa';
 import Button from '@/components/ui/Button';
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   currentSection: Section;
@@ -35,14 +36,13 @@ export function Header({ currentSection, onMenuClick, onRefresh }: HeaderProps) 
           </div>
         </div>
         <div className="flex items-center gap-2.5">
-          
+
           <Button
-            variant="secondary"
-            onClick={onRefresh}
-            className="p-2! rounded-xl! w-9! h-9! flex! items-center! justify-center! border-0 hover:bg-rekany-beige! text-rekany-gray/40! hover:text-rekany-dark!"
-            title="Rafraîchir"
+            variant="primary"
+            onClick={() => window.location.href = '/admin/register'}
+            title="Créer un compte"
           >
-            <FaSyncAlt className="text-sm" />
+            Créer un compte
           </Button>
         </div>
       </div>

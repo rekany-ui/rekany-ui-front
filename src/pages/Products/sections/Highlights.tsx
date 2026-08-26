@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { BadgeCheck, Leaf, Sprout, Truck } from "lucide-react";
 
 const highlights = [
-  { icon: Leaf, title: "100% Biologique", text: "Cultures sans intrant chimique" },
+  { icon: Leaf, title: "Excellence Végétale", text: "Des produits d'une qualité exceptionnelle" },
   { icon: BadgeCheck, title: "Qualité Garantie", text: "Contrôle rigoureux sur chaque lot" },
   { icon: Sprout, title: "Producteurs locaux", text: "500+ agriculteurs partenaires" },
-  { icon: Truck, title: "Livraison suivie", text: "Traçabilité QR code 24/7" },
+  { icon: Truck, title: "Livraison suivie", text: "Livraison rapide et fiable" },
 ];
 
 export default function Highlights() {
